@@ -1,0 +1,1956 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>manimlib.scene.vector_space_scene API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>manimlib.scene.vector_space_scene</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+
+from manimlib.animation.animation import Animation
+from manimlib.animation.creation import ShowCreation
+from manimlib.animation.creation import Write
+from manimlib.animation.fading import FadeOut
+from manimlib.animation.growing import GrowArrow
+from manimlib.animation.transform import ApplyFunction
+from manimlib.animation.transform import ApplyPointwiseFunction
+from manimlib.animation.transform import Transform
+from manimlib.constants import *
+from manimlib.mobject.coordinate_systems import Axes
+from manimlib.mobject.coordinate_systems import NumberPlane
+from manimlib.mobject.geometry import Arrow
+from manimlib.mobject.geometry import Dot
+from manimlib.mobject.geometry import Line
+from manimlib.mobject.geometry import Rectangle
+from manimlib.mobject.geometry import Vector
+from manimlib.mobject.matrix import Matrix
+from manimlib.mobject.matrix import VECTOR_LABEL_SCALE_FACTOR
+from manimlib.mobject.matrix import vector_coordinate_label
+from manimlib.mobject.mobject import Mobject
+from manimlib.mobject.svg.tex_mobject import TexMobject
+from manimlib.mobject.svg.tex_mobject import TextMobject
+from manimlib.mobject.types.vectorized_mobject import VGroup
+from manimlib.mobject.types.vectorized_mobject import VMobject
+from manimlib.scene.scene import Scene
+from manimlib.utils.rate_functions import rush_from
+from manimlib.utils.rate_functions import rush_into
+from manimlib.utils.space_ops import angle_of_vector
+from manimlib.utils.space_ops import get_norm
+
+X_COLOR = GREEN_C
+Y_COLOR = RED_C
+Z_COLOR = BLUE_D
+
+
+# TODO: Much of this scene type seems dependent on the coordinate system chosen.
+# That is, being centered at the origin with grid units corresponding to the
+# arbitrary space units.  Change it!
+#
+# Also, methods I would have thought of as getters, like coords_to_vector, are
+# actually doing a lot of animating.
+class VectorScene(Scene):
+    CONFIG = {
+        &#34;basis_vector_stroke_width&#34;: 6
+    }
+
+    def add_plane(self, animate=False, **kwargs):
+        plane = NumberPlane(**kwargs)
+        if animate:
+            self.play(ShowCreation(plane, lag_ratio=0.5))
+        self.add(plane)
+        return plane
+
+    def add_axes(self, animate=False, color=WHITE, **kwargs):
+        axes = Axes(color=color, tick_frequency=1)
+        if animate:
+            self.play(ShowCreation(axes))
+        self.add(axes)
+        return axes
+
+    def lock_in_faded_grid(self, dimness=0.7, axes_dimness=0.5):
+        plane = self.add_plane()
+        axes = plane.get_axes()
+        plane.fade(dimness)
+        axes.set_color(WHITE)
+        axes.fade(axes_dimness)
+        self.add(axes)
+        self.freeze_background()
+
+    def get_vector(self, numerical_vector, **kwargs):
+        return Arrow(
+            self.plane.coords_to_point(0, 0),
+            self.plane.coords_to_point(*numerical_vector[:2]),
+            buff=0,
+            **kwargs
+        )
+
+    def add_vector(self, vector, color=YELLOW, animate=True, **kwargs):
+        if not isinstance(vector, Arrow):
+            vector = Vector(vector, color=color, **kwargs)
+        if animate:
+            self.play(GrowArrow(vector))
+        self.add(vector)
+        return vector
+
+    def write_vector_coordinates(self, vector, **kwargs):
+        coords = vector_coordinate_label(vector, **kwargs)
+        self.play(Write(coords))
+        return coords
+
+    def get_basis_vectors(self, i_hat_color=X_COLOR, j_hat_color=Y_COLOR):
+        return VGroup(*[
+            Vector(
+                vect,
+                color=color,
+                stroke_width=self.basis_vector_stroke_width
+            )
+            for vect, color in [
+                ([1, 0], i_hat_color),
+                ([0, 1], j_hat_color)
+            ]
+        ])
+
+    def get_basis_vector_labels(self, **kwargs):
+        i_hat, j_hat = self.get_basis_vectors()
+        return VGroup(*[
+            self.get_vector_label(
+                vect, label, color=color,
+                label_scale_factor=1,
+                **kwargs
+            )
+            for vect, label, color in [
+                (i_hat, &#34;\\hat{\\imath}&#34;, X_COLOR),
+                (j_hat, &#34;\\hat{\\jmath}&#34;, Y_COLOR),
+            ]
+        ])
+
+    def get_vector_label(self, vector, label,
+                         at_tip=False,
+                         direction=&#34;left&#34;,
+                         rotate=False,
+                         color=None,
+                         label_scale_factor=VECTOR_LABEL_SCALE_FACTOR):
+        if not isinstance(label, TexMobject):
+            if len(label) == 1:
+                label = &#34;\\vec{\\textbf{%s}}&#34; % label
+            label = TexMobject(label)
+            if color is None:
+                color = vector.get_color()
+            label.set_color(color)
+        label.scale(label_scale_factor)
+        label.add_background_rectangle()
+
+        if at_tip:
+            vect = vector.get_vector()
+            vect /= get_norm(vect)
+            label.next_to(vector.get_end(), vect, buff=SMALL_BUFF)
+        else:
+            angle = vector.get_angle()
+            if not rotate:
+                label.rotate(-angle, about_point=ORIGIN)
+            if direction == &#34;left&#34;:
+                label.shift(-label.get_bottom() + 0.1 * UP)
+            else:
+                label.shift(-label.get_top() + 0.1 * DOWN)
+            label.rotate(angle, about_point=ORIGIN)
+            label.shift((vector.get_end() - vector.get_start()) / 2)
+        return label
+
+    def label_vector(self, vector, label, animate=True, **kwargs):
+        label = self.get_vector_label(vector, label, **kwargs)
+        if animate:
+            self.play(Write(label, run_time=1))
+        self.add(label)
+        return label
+
+    def position_x_coordinate(self, x_coord, x_line, vector):
+        x_coord.next_to(x_line, -np.sign(vector[1]) * UP)
+        x_coord.set_color(X_COLOR)
+        return x_coord
+
+    def position_y_coordinate(self, y_coord, y_line, vector):
+        y_coord.next_to(y_line, np.sign(vector[0]) * RIGHT)
+        y_coord.set_color(Y_COLOR)
+        return y_coord
+
+    def coords_to_vector(self, vector, coords_start=2 * RIGHT + 2 * UP, clean_up=True):
+        starting_mobjects = list(self.mobjects)
+        array = Matrix(vector)
+        array.shift(coords_start)
+        arrow = Vector(vector)
+        x_line = Line(ORIGIN, vector[0] * RIGHT)
+        y_line = Line(x_line.get_end(), arrow.get_end())
+        x_line.set_color(X_COLOR)
+        y_line.set_color(Y_COLOR)
+        x_coord, y_coord = array.get_mob_matrix().flatten()
+
+        self.play(Write(array, run_time=1))
+        self.wait()
+        self.play(ApplyFunction(
+            lambda x: self.position_x_coordinate(x, x_line, vector),
+            x_coord
+        ))
+        self.play(ShowCreation(x_line))
+        self.play(
+            ApplyFunction(
+                lambda y: self.position_y_coordinate(y, y_line, vector),
+                y_coord
+            ),
+            FadeOut(array.get_brackets())
+        )
+        y_coord, brackets = self.get_mobjects_from_last_animation()
+        self.play(ShowCreation(y_line))
+        self.play(ShowCreation(arrow))
+        self.wait()
+        if clean_up:
+            self.clear()
+            self.add(*starting_mobjects)
+
+    def vector_to_coords(self, vector, integer_labels=True, clean_up=True):
+        starting_mobjects = list(self.mobjects)
+        show_creation = False
+        if isinstance(vector, Arrow):
+            arrow = vector
+            vector = arrow.get_end()[:2]
+        else:
+            arrow = Vector(vector)
+            show_creation = True
+        array = vector_coordinate_label(arrow, integer_labels=integer_labels)
+        x_line = Line(ORIGIN, vector[0] * RIGHT)
+        y_line = Line(x_line.get_end(), arrow.get_end())
+        x_line.set_color(X_COLOR)
+        y_line.set_color(Y_COLOR)
+        x_coord, y_coord = array.get_mob_matrix().flatten()
+        x_coord_start = self.position_x_coordinate(
+            x_coord.copy(), x_line, vector
+        )
+        y_coord_start = self.position_y_coordinate(
+            y_coord.copy(), y_line, vector
+        )
+        brackets = array.get_brackets()
+
+        if show_creation:
+            self.play(ShowCreation(arrow))
+        self.play(
+            ShowCreation(x_line),
+            Write(x_coord_start),
+            run_time=1
+        )
+        self.play(
+            ShowCreation(y_line),
+            Write(y_coord_start),
+            run_time=1
+        )
+        self.wait()
+        self.play(
+            Transform(x_coord_start, x_coord, lag_ratio=0),
+            Transform(y_coord_start, y_coord, lag_ratio=0),
+            Write(brackets, run_time=1),
+        )
+        self.wait()
+
+        self.remove(x_coord_start, y_coord_start, brackets)
+        self.add(array)
+        if clean_up:
+            self.clear()
+            self.add(*starting_mobjects)
+        return array, x_line, y_line
+
+    def show_ghost_movement(self, vector):
+        if isinstance(vector, Arrow):
+            vector = vector.get_end() - vector.get_start()
+        elif len(vector) == 2:
+            vector = np.append(np.array(vector), 0.0)
+        x_max = int(FRAME_X_RADIUS + abs(vector[0]))
+        y_max = int(FRAME_Y_RADIUS + abs(vector[1]))
+        dots = VMobject(*[
+            Dot(x * RIGHT + y * UP)
+            for x in range(-x_max, x_max)
+            for y in range(-y_max, y_max)
+        ])
+        dots.set_fill(BLACK, opacity=0)
+        dots_halfway = dots.copy().shift(vector / 2).set_fill(WHITE, 1)
+        dots_end = dots.copy().shift(vector)
+
+        self.play(Transform(
+            dots, dots_halfway, rate_func=rush_into
+        ))
+        self.play(Transform(
+            dots, dots_end, rate_func=rush_from
+        ))
+        self.remove(dots)
+
+
+class LinearTransformationScene(VectorScene):
+    CONFIG = {
+        &#34;include_background_plane&#34;: True,
+        &#34;include_foreground_plane&#34;: True,
+        &#34;foreground_plane_kwargs&#34;: {
+            &#34;x_max&#34;: FRAME_WIDTH / 2,
+            &#34;x_min&#34;: -FRAME_WIDTH / 2,
+            &#34;y_max&#34;: FRAME_WIDTH / 2,
+            &#34;y_min&#34;: -FRAME_WIDTH / 2,
+            &#34;faded_line_ratio&#34;: 0
+        },
+        &#34;background_plane_kwargs&#34;: {
+            &#34;color&#34;: GREY,
+            &#34;axis_config&#34;: {
+                &#34;stroke_color&#34;: LIGHT_GREY,
+            },
+            &#34;axis_config&#34;: {
+                &#34;color&#34;: GREY,
+            },
+            &#34;background_line_style&#34;: {
+                &#34;stroke_color&#34;: GREY,
+                &#34;stroke_width&#34;: 1,
+            },
+        },
+        &#34;show_coordinates&#34;: False,
+        &#34;show_basis_vectors&#34;: True,
+        &#34;basis_vector_stroke_width&#34;: 6,
+        &#34;i_hat_color&#34;: X_COLOR,
+        &#34;j_hat_color&#34;: Y_COLOR,
+        &#34;leave_ghost_vectors&#34;: False,
+        &#34;t_matrix&#34;: [[3, 0], [1, 2]],
+    }
+
+    def setup(self):
+        # The has_already_setup attr is to not break all the old Scenes
+        if hasattr(self, &#34;has_already_setup&#34;):
+            return
+        self.has_already_setup = True
+        self.background_mobjects = []
+        self.foreground_mobjects = []
+        self.transformable_mobjects = []
+        self.moving_vectors = []
+        self.transformable_labels = []
+        self.moving_mobjects = []
+
+        self.t_matrix = np.array(self.t_matrix)
+        self.background_plane = NumberPlane(
+            **self.background_plane_kwargs
+        )
+
+        if self.show_coordinates:
+            self.background_plane.add_coordinates()
+        if self.include_background_plane:
+            self.add_background_mobject(self.background_plane)
+        if self.include_foreground_plane:
+            self.plane = NumberPlane(**self.foreground_plane_kwargs)
+            self.add_transformable_mobject(self.plane)
+        if self.show_basis_vectors:
+            self.basis_vectors = self.get_basis_vectors(
+                i_hat_color=self.i_hat_color,
+                j_hat_color=self.j_hat_color,
+            )
+            self.moving_vectors += list(self.basis_vectors)
+            self.i_hat, self.j_hat = self.basis_vectors
+            self.add(self.basis_vectors)
+
+    def add_special_mobjects(self, mob_list, *mobs_to_add):
+        for mobject in mobs_to_add:
+            if mobject not in mob_list:
+                mob_list.append(mobject)
+                self.add(mobject)
+
+    def add_background_mobject(self, *mobjects):
+        self.add_special_mobjects(self.background_mobjects, *mobjects)
+
+    # TODO, this conflicts with Scene.add_fore
+    def add_foreground_mobject(self, *mobjects):
+        self.add_special_mobjects(self.foreground_mobjects, *mobjects)
+
+    def add_transformable_mobject(self, *mobjects):
+        self.add_special_mobjects(self.transformable_mobjects, *mobjects)
+
+    def add_moving_mobject(self, mobject, target_mobject=None):
+        mobject.target = target_mobject
+        self.add_special_mobjects(self.moving_mobjects, mobject)
+
+    def get_unit_square(self, color=YELLOW, opacity=0.3, stroke_width=3):
+        square = self.square = Rectangle(
+            color=color,
+            width=self.plane.get_x_unit_size(),
+            height=self.plane.get_y_unit_size(),
+            stroke_color=color,
+            stroke_width=stroke_width,
+            fill_color=color,
+            fill_opacity=opacity
+        )
+        square.move_to(self.plane.coords_to_point(0, 0), DL)
+        return square
+
+    def add_unit_square(self, animate=False, **kwargs):
+        square = self.get_unit_square(**kwargs)
+        if animate:
+            self.play(
+                DrawBorderThenFill(square),
+                Animation(Group(*self.moving_vectors))
+            )
+        self.add_transformable_mobject(square)
+        self.bring_to_front(*self.moving_vectors)
+        self.square = square
+        return self
+
+    def add_vector(self, vector, color=YELLOW, **kwargs):
+        vector = VectorScene.add_vector(
+            self, vector, color=color, **kwargs
+        )
+        self.moving_vectors.append(vector)
+        return vector
+
+    def write_vector_coordinates(self, vector, **kwargs):
+        coords = VectorScene.write_vector_coordinates(self, vector, **kwargs)
+        self.add_foreground_mobject(coords)
+        return coords
+
+    def add_transformable_label(
+            self, vector, label,
+            transformation_name=&#34;L&#34;,
+            new_label=None,
+            **kwargs):
+        label_mob = self.label_vector(vector, label, **kwargs)
+        if new_label:
+            label_mob.target_text = new_label
+        else:
+            label_mob.target_text = &#34;%s(%s)&#34; % (
+                transformation_name,
+                label_mob.get_tex_string()
+            )
+        label_mob.vector = vector
+        label_mob.kwargs = kwargs
+        if &#34;animate&#34; in label_mob.kwargs:
+            label_mob.kwargs.pop(&#34;animate&#34;)
+        self.transformable_labels.append(label_mob)
+        return label_mob
+
+    def add_title(self, title, scale_factor=1.5, animate=False):
+        if not isinstance(title, Mobject):
+            title = TextMobject(title).scale(scale_factor)
+        title.to_edge(UP)
+        title.add_background_rectangle()
+        if animate:
+            self.play(Write(title))
+        self.add_foreground_mobject(title)
+        self.title = title
+        return self
+
+    def get_matrix_transformation(self, matrix):
+        return self.get_transposed_matrix_transformation(np.array(matrix).T)
+
+    def get_transposed_matrix_transformation(self, transposed_matrix):
+        transposed_matrix = np.array(transposed_matrix)
+        if transposed_matrix.shape == (2, 2):
+            new_matrix = np.identity(3)
+            new_matrix[:2, :2] = transposed_matrix
+            transposed_matrix = new_matrix
+        elif transposed_matrix.shape != (3, 3):
+            raise Exception(&#34;Matrix has bad dimensions&#34;)
+        return lambda point: np.dot(point, transposed_matrix)
+
+    def get_piece_movement(self, pieces):
+        start = VGroup(*pieces)
+        target = VGroup(*[mob.target for mob in pieces])
+        if self.leave_ghost_vectors:
+            self.add(start.copy().fade(0.7))
+        return Transform(start, target, lag_ratio=0)
+
+    def get_moving_mobject_movement(self, func):
+        for m in self.moving_mobjects:
+            if m.target is None:
+                m.target = m.copy()
+            target_point = func(m.get_center())
+            m.target.move_to(target_point)
+        return self.get_piece_movement(self.moving_mobjects)
+
+    def get_vector_movement(self, func):
+        for v in self.moving_vectors:
+            v.target = Vector(func(v.get_end()), color=v.get_color())
+            norm = get_norm(v.target.get_end())
+            if norm &lt; 0.1:
+                v.target.get_tip().scale_in_place(norm)
+        return self.get_piece_movement(self.moving_vectors)
+
+    def get_transformable_label_movement(self):
+        for l in self.transformable_labels:
+            l.target = self.get_vector_label(
+                l.vector.target, l.target_text, **l.kwargs
+            )
+        return self.get_piece_movement(self.transformable_labels)
+
+    def apply_matrix(self, matrix, **kwargs):
+        self.apply_transposed_matrix(np.array(matrix).T, **kwargs)
+
+    def apply_inverse(self, matrix, **kwargs):
+        self.apply_matrix(np.linalg.inv(matrix), **kwargs)
+
+    def apply_transposed_matrix(self, transposed_matrix, **kwargs):
+        func = self.get_transposed_matrix_transformation(transposed_matrix)
+        if &#34;path_arc&#34; not in kwargs:
+            net_rotation = np.mean([
+                angle_of_vector(func(RIGHT)),
+                angle_of_vector(func(UP)) - np.pi / 2
+            ])
+            kwargs[&#34;path_arc&#34;] = net_rotation
+        self.apply_function(func, **kwargs)
+
+    def apply_inverse_transpose(self, t_matrix, **kwargs):
+        t_inv = np.linalg.inv(np.array(t_matrix).T).T
+        self.apply_transposed_matrix(t_inv, **kwargs)
+
+    def apply_nonlinear_transformation(self, function, **kwargs):
+        self.plane.prepare_for_nonlinear_transform()
+        self.apply_function(function, **kwargs)
+
+    def apply_function(self, function, added_anims=[], **kwargs):
+        if &#34;run_time&#34; not in kwargs:
+            kwargs[&#34;run_time&#34;] = 3
+        anims = [
+            ApplyPointwiseFunction(function, t_mob)
+            for t_mob in self.transformable_mobjects
+        ] + [
+            self.get_vector_movement(function),
+            self.get_transformable_label_movement(),
+            self.get_moving_mobject_movement(function),
+        ] + [
+            Animation(f_mob)
+            for f_mob in self.foreground_mobjects
+        ] + added_anims
+        self.play(*anims, **kwargs)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene"><code class="flex name class">
+<span>class <span class="ident">LinearTransformationScene</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LinearTransformationScene(VectorScene):
+    CONFIG = {
+        &#34;include_background_plane&#34;: True,
+        &#34;include_foreground_plane&#34;: True,
+        &#34;foreground_plane_kwargs&#34;: {
+            &#34;x_max&#34;: FRAME_WIDTH / 2,
+            &#34;x_min&#34;: -FRAME_WIDTH / 2,
+            &#34;y_max&#34;: FRAME_WIDTH / 2,
+            &#34;y_min&#34;: -FRAME_WIDTH / 2,
+            &#34;faded_line_ratio&#34;: 0
+        },
+        &#34;background_plane_kwargs&#34;: {
+            &#34;color&#34;: GREY,
+            &#34;axis_config&#34;: {
+                &#34;stroke_color&#34;: LIGHT_GREY,
+            },
+            &#34;axis_config&#34;: {
+                &#34;color&#34;: GREY,
+            },
+            &#34;background_line_style&#34;: {
+                &#34;stroke_color&#34;: GREY,
+                &#34;stroke_width&#34;: 1,
+            },
+        },
+        &#34;show_coordinates&#34;: False,
+        &#34;show_basis_vectors&#34;: True,
+        &#34;basis_vector_stroke_width&#34;: 6,
+        &#34;i_hat_color&#34;: X_COLOR,
+        &#34;j_hat_color&#34;: Y_COLOR,
+        &#34;leave_ghost_vectors&#34;: False,
+        &#34;t_matrix&#34;: [[3, 0], [1, 2]],
+    }
+
+    def setup(self):
+        # The has_already_setup attr is to not break all the old Scenes
+        if hasattr(self, &#34;has_already_setup&#34;):
+            return
+        self.has_already_setup = True
+        self.background_mobjects = []
+        self.foreground_mobjects = []
+        self.transformable_mobjects = []
+        self.moving_vectors = []
+        self.transformable_labels = []
+        self.moving_mobjects = []
+
+        self.t_matrix = np.array(self.t_matrix)
+        self.background_plane = NumberPlane(
+            **self.background_plane_kwargs
+        )
+
+        if self.show_coordinates:
+            self.background_plane.add_coordinates()
+        if self.include_background_plane:
+            self.add_background_mobject(self.background_plane)
+        if self.include_foreground_plane:
+            self.plane = NumberPlane(**self.foreground_plane_kwargs)
+            self.add_transformable_mobject(self.plane)
+        if self.show_basis_vectors:
+            self.basis_vectors = self.get_basis_vectors(
+                i_hat_color=self.i_hat_color,
+                j_hat_color=self.j_hat_color,
+            )
+            self.moving_vectors += list(self.basis_vectors)
+            self.i_hat, self.j_hat = self.basis_vectors
+            self.add(self.basis_vectors)
+
+    def add_special_mobjects(self, mob_list, *mobs_to_add):
+        for mobject in mobs_to_add:
+            if mobject not in mob_list:
+                mob_list.append(mobject)
+                self.add(mobject)
+
+    def add_background_mobject(self, *mobjects):
+        self.add_special_mobjects(self.background_mobjects, *mobjects)
+
+    # TODO, this conflicts with Scene.add_fore
+    def add_foreground_mobject(self, *mobjects):
+        self.add_special_mobjects(self.foreground_mobjects, *mobjects)
+
+    def add_transformable_mobject(self, *mobjects):
+        self.add_special_mobjects(self.transformable_mobjects, *mobjects)
+
+    def add_moving_mobject(self, mobject, target_mobject=None):
+        mobject.target = target_mobject
+        self.add_special_mobjects(self.moving_mobjects, mobject)
+
+    def get_unit_square(self, color=YELLOW, opacity=0.3, stroke_width=3):
+        square = self.square = Rectangle(
+            color=color,
+            width=self.plane.get_x_unit_size(),
+            height=self.plane.get_y_unit_size(),
+            stroke_color=color,
+            stroke_width=stroke_width,
+            fill_color=color,
+            fill_opacity=opacity
+        )
+        square.move_to(self.plane.coords_to_point(0, 0), DL)
+        return square
+
+    def add_unit_square(self, animate=False, **kwargs):
+        square = self.get_unit_square(**kwargs)
+        if animate:
+            self.play(
+                DrawBorderThenFill(square),
+                Animation(Group(*self.moving_vectors))
+            )
+        self.add_transformable_mobject(square)
+        self.bring_to_front(*self.moving_vectors)
+        self.square = square
+        return self
+
+    def add_vector(self, vector, color=YELLOW, **kwargs):
+        vector = VectorScene.add_vector(
+            self, vector, color=color, **kwargs
+        )
+        self.moving_vectors.append(vector)
+        return vector
+
+    def write_vector_coordinates(self, vector, **kwargs):
+        coords = VectorScene.write_vector_coordinates(self, vector, **kwargs)
+        self.add_foreground_mobject(coords)
+        return coords
+
+    def add_transformable_label(
+            self, vector, label,
+            transformation_name=&#34;L&#34;,
+            new_label=None,
+            **kwargs):
+        label_mob = self.label_vector(vector, label, **kwargs)
+        if new_label:
+            label_mob.target_text = new_label
+        else:
+            label_mob.target_text = &#34;%s(%s)&#34; % (
+                transformation_name,
+                label_mob.get_tex_string()
+            )
+        label_mob.vector = vector
+        label_mob.kwargs = kwargs
+        if &#34;animate&#34; in label_mob.kwargs:
+            label_mob.kwargs.pop(&#34;animate&#34;)
+        self.transformable_labels.append(label_mob)
+        return label_mob
+
+    def add_title(self, title, scale_factor=1.5, animate=False):
+        if not isinstance(title, Mobject):
+            title = TextMobject(title).scale(scale_factor)
+        title.to_edge(UP)
+        title.add_background_rectangle()
+        if animate:
+            self.play(Write(title))
+        self.add_foreground_mobject(title)
+        self.title = title
+        return self
+
+    def get_matrix_transformation(self, matrix):
+        return self.get_transposed_matrix_transformation(np.array(matrix).T)
+
+    def get_transposed_matrix_transformation(self, transposed_matrix):
+        transposed_matrix = np.array(transposed_matrix)
+        if transposed_matrix.shape == (2, 2):
+            new_matrix = np.identity(3)
+            new_matrix[:2, :2] = transposed_matrix
+            transposed_matrix = new_matrix
+        elif transposed_matrix.shape != (3, 3):
+            raise Exception(&#34;Matrix has bad dimensions&#34;)
+        return lambda point: np.dot(point, transposed_matrix)
+
+    def get_piece_movement(self, pieces):
+        start = VGroup(*pieces)
+        target = VGroup(*[mob.target for mob in pieces])
+        if self.leave_ghost_vectors:
+            self.add(start.copy().fade(0.7))
+        return Transform(start, target, lag_ratio=0)
+
+    def get_moving_mobject_movement(self, func):
+        for m in self.moving_mobjects:
+            if m.target is None:
+                m.target = m.copy()
+            target_point = func(m.get_center())
+            m.target.move_to(target_point)
+        return self.get_piece_movement(self.moving_mobjects)
+
+    def get_vector_movement(self, func):
+        for v in self.moving_vectors:
+            v.target = Vector(func(v.get_end()), color=v.get_color())
+            norm = get_norm(v.target.get_end())
+            if norm &lt; 0.1:
+                v.target.get_tip().scale_in_place(norm)
+        return self.get_piece_movement(self.moving_vectors)
+
+    def get_transformable_label_movement(self):
+        for l in self.transformable_labels:
+            l.target = self.get_vector_label(
+                l.vector.target, l.target_text, **l.kwargs
+            )
+        return self.get_piece_movement(self.transformable_labels)
+
+    def apply_matrix(self, matrix, **kwargs):
+        self.apply_transposed_matrix(np.array(matrix).T, **kwargs)
+
+    def apply_inverse(self, matrix, **kwargs):
+        self.apply_matrix(np.linalg.inv(matrix), **kwargs)
+
+    def apply_transposed_matrix(self, transposed_matrix, **kwargs):
+        func = self.get_transposed_matrix_transformation(transposed_matrix)
+        if &#34;path_arc&#34; not in kwargs:
+            net_rotation = np.mean([
+                angle_of_vector(func(RIGHT)),
+                angle_of_vector(func(UP)) - np.pi / 2
+            ])
+            kwargs[&#34;path_arc&#34;] = net_rotation
+        self.apply_function(func, **kwargs)
+
+    def apply_inverse_transpose(self, t_matrix, **kwargs):
+        t_inv = np.linalg.inv(np.array(t_matrix).T).T
+        self.apply_transposed_matrix(t_inv, **kwargs)
+
+    def apply_nonlinear_transformation(self, function, **kwargs):
+        self.plane.prepare_for_nonlinear_transform()
+        self.apply_function(function, **kwargs)
+
+    def apply_function(self, function, added_anims=[], **kwargs):
+        if &#34;run_time&#34; not in kwargs:
+            kwargs[&#34;run_time&#34;] = 3
+        anims = [
+            ApplyPointwiseFunction(function, t_mob)
+            for t_mob in self.transformable_mobjects
+        ] + [
+            self.get_vector_movement(function),
+            self.get_transformable_label_movement(),
+            self.get_moving_mobject_movement(function),
+        ] + [
+            Animation(f_mob)
+            for f_mob in self.foreground_mobjects
+        ] + added_anims
+        self.play(*anims, **kwargs)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="manimlib.scene.vector_space_scene.VectorScene" href="#manimlib.scene.vector_space_scene.VectorScene">VectorScene</a></li>
+<li><a title="manimlib.scene.scene.Scene" href="scene.html#manimlib.scene.scene.Scene">Scene</a></li>
+<li><a title="manimlib.container.container.Container" href="../container/container.html#manimlib.container.container.Container">Container</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.CONFIG"><code class="name">var <span class="ident">CONFIG</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_background_mobject"><code class="name flex">
+<span>def <span class="ident">add_background_mobject</span></span>(<span>self, *mobjects)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_background_mobject(self, *mobjects):
+    self.add_special_mobjects(self.background_mobjects, *mobjects)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_foreground_mobject"><code class="name flex">
+<span>def <span class="ident">add_foreground_mobject</span></span>(<span>self, *mobjects)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_foreground_mobject(self, *mobjects):
+    self.add_special_mobjects(self.foreground_mobjects, *mobjects)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_moving_mobject"><code class="name flex">
+<span>def <span class="ident">add_moving_mobject</span></span>(<span>self, mobject, target_mobject=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_moving_mobject(self, mobject, target_mobject=None):
+    mobject.target = target_mobject
+    self.add_special_mobjects(self.moving_mobjects, mobject)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_special_mobjects"><code class="name flex">
+<span>def <span class="ident">add_special_mobjects</span></span>(<span>self, mob_list, *mobs_to_add)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_special_mobjects(self, mob_list, *mobs_to_add):
+    for mobject in mobs_to_add:
+        if mobject not in mob_list:
+            mob_list.append(mobject)
+            self.add(mobject)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_title"><code class="name flex">
+<span>def <span class="ident">add_title</span></span>(<span>self, title, scale_factor=1.5, animate=False)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_title(self, title, scale_factor=1.5, animate=False):
+    if not isinstance(title, Mobject):
+        title = TextMobject(title).scale(scale_factor)
+    title.to_edge(UP)
+    title.add_background_rectangle()
+    if animate:
+        self.play(Write(title))
+    self.add_foreground_mobject(title)
+    self.title = title
+    return self</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_transformable_label"><code class="name flex">
+<span>def <span class="ident">add_transformable_label</span></span>(<span>self, vector, label, transformation_name='L', new_label=None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_transformable_label(
+        self, vector, label,
+        transformation_name=&#34;L&#34;,
+        new_label=None,
+        **kwargs):
+    label_mob = self.label_vector(vector, label, **kwargs)
+    if new_label:
+        label_mob.target_text = new_label
+    else:
+        label_mob.target_text = &#34;%s(%s)&#34; % (
+            transformation_name,
+            label_mob.get_tex_string()
+        )
+    label_mob.vector = vector
+    label_mob.kwargs = kwargs
+    if &#34;animate&#34; in label_mob.kwargs:
+        label_mob.kwargs.pop(&#34;animate&#34;)
+    self.transformable_labels.append(label_mob)
+    return label_mob</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_transformable_mobject"><code class="name flex">
+<span>def <span class="ident">add_transformable_mobject</span></span>(<span>self, *mobjects)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_transformable_mobject(self, *mobjects):
+    self.add_special_mobjects(self.transformable_mobjects, *mobjects)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_unit_square"><code class="name flex">
+<span>def <span class="ident">add_unit_square</span></span>(<span>self, animate=False, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_unit_square(self, animate=False, **kwargs):
+    square = self.get_unit_square(**kwargs)
+    if animate:
+        self.play(
+            DrawBorderThenFill(square),
+            Animation(Group(*self.moving_vectors))
+        )
+    self.add_transformable_mobject(square)
+    self.bring_to_front(*self.moving_vectors)
+    self.square = square
+    return self</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.add_vector"><code class="name flex">
+<span>def <span class="ident">add_vector</span></span>(<span>self, vector, color='#FFFF00', **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_vector(self, vector, color=YELLOW, **kwargs):
+    vector = VectorScene.add_vector(
+        self, vector, color=color, **kwargs
+    )
+    self.moving_vectors.append(vector)
+    return vector</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_function"><code class="name flex">
+<span>def <span class="ident">apply_function</span></span>(<span>self, function, added_anims=[], **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_function(self, function, added_anims=[], **kwargs):
+    if &#34;run_time&#34; not in kwargs:
+        kwargs[&#34;run_time&#34;] = 3
+    anims = [
+        ApplyPointwiseFunction(function, t_mob)
+        for t_mob in self.transformable_mobjects
+    ] + [
+        self.get_vector_movement(function),
+        self.get_transformable_label_movement(),
+        self.get_moving_mobject_movement(function),
+    ] + [
+        Animation(f_mob)
+        for f_mob in self.foreground_mobjects
+    ] + added_anims
+    self.play(*anims, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_inverse"><code class="name flex">
+<span>def <span class="ident">apply_inverse</span></span>(<span>self, matrix, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_inverse(self, matrix, **kwargs):
+    self.apply_matrix(np.linalg.inv(matrix), **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_inverse_transpose"><code class="name flex">
+<span>def <span class="ident">apply_inverse_transpose</span></span>(<span>self, t_matrix, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_inverse_transpose(self, t_matrix, **kwargs):
+    t_inv = np.linalg.inv(np.array(t_matrix).T).T
+    self.apply_transposed_matrix(t_inv, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_matrix"><code class="name flex">
+<span>def <span class="ident">apply_matrix</span></span>(<span>self, matrix, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_matrix(self, matrix, **kwargs):
+    self.apply_transposed_matrix(np.array(matrix).T, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_nonlinear_transformation"><code class="name flex">
+<span>def <span class="ident">apply_nonlinear_transformation</span></span>(<span>self, function, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_nonlinear_transformation(self, function, **kwargs):
+    self.plane.prepare_for_nonlinear_transform()
+    self.apply_function(function, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_transposed_matrix"><code class="name flex">
+<span>def <span class="ident">apply_transposed_matrix</span></span>(<span>self, transposed_matrix, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_transposed_matrix(self, transposed_matrix, **kwargs):
+    func = self.get_transposed_matrix_transformation(transposed_matrix)
+    if &#34;path_arc&#34; not in kwargs:
+        net_rotation = np.mean([
+            angle_of_vector(func(RIGHT)),
+            angle_of_vector(func(UP)) - np.pi / 2
+        ])
+        kwargs[&#34;path_arc&#34;] = net_rotation
+    self.apply_function(func, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.get_matrix_transformation"><code class="name flex">
+<span>def <span class="ident">get_matrix_transformation</span></span>(<span>self, matrix)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_matrix_transformation(self, matrix):
+    return self.get_transposed_matrix_transformation(np.array(matrix).T)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.get_moving_mobject_movement"><code class="name flex">
+<span>def <span class="ident">get_moving_mobject_movement</span></span>(<span>self, func)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_moving_mobject_movement(self, func):
+    for m in self.moving_mobjects:
+        if m.target is None:
+            m.target = m.copy()
+        target_point = func(m.get_center())
+        m.target.move_to(target_point)
+    return self.get_piece_movement(self.moving_mobjects)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.get_piece_movement"><code class="name flex">
+<span>def <span class="ident">get_piece_movement</span></span>(<span>self, pieces)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_piece_movement(self, pieces):
+    start = VGroup(*pieces)
+    target = VGroup(*[mob.target for mob in pieces])
+    if self.leave_ghost_vectors:
+        self.add(start.copy().fade(0.7))
+    return Transform(start, target, lag_ratio=0)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.get_transformable_label_movement"><code class="name flex">
+<span>def <span class="ident">get_transformable_label_movement</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_transformable_label_movement(self):
+    for l in self.transformable_labels:
+        l.target = self.get_vector_label(
+            l.vector.target, l.target_text, **l.kwargs
+        )
+    return self.get_piece_movement(self.transformable_labels)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.get_transposed_matrix_transformation"><code class="name flex">
+<span>def <span class="ident">get_transposed_matrix_transformation</span></span>(<span>self, transposed_matrix)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_transposed_matrix_transformation(self, transposed_matrix):
+    transposed_matrix = np.array(transposed_matrix)
+    if transposed_matrix.shape == (2, 2):
+        new_matrix = np.identity(3)
+        new_matrix[:2, :2] = transposed_matrix
+        transposed_matrix = new_matrix
+    elif transposed_matrix.shape != (3, 3):
+        raise Exception(&#34;Matrix has bad dimensions&#34;)
+    return lambda point: np.dot(point, transposed_matrix)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.get_unit_square"><code class="name flex">
+<span>def <span class="ident">get_unit_square</span></span>(<span>self, color='#FFFF00', opacity=0.3, stroke_width=3)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_unit_square(self, color=YELLOW, opacity=0.3, stroke_width=3):
+    square = self.square = Rectangle(
+        color=color,
+        width=self.plane.get_x_unit_size(),
+        height=self.plane.get_y_unit_size(),
+        stroke_color=color,
+        stroke_width=stroke_width,
+        fill_color=color,
+        fill_opacity=opacity
+    )
+    square.move_to(self.plane.coords_to_point(0, 0), DL)
+    return square</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.get_vector_movement"><code class="name flex">
+<span>def <span class="ident">get_vector_movement</span></span>(<span>self, func)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_vector_movement(self, func):
+    for v in self.moving_vectors:
+        v.target = Vector(func(v.get_end()), color=v.get_color())
+        norm = get_norm(v.target.get_end())
+        if norm &lt; 0.1:
+            v.target.get_tip().scale_in_place(norm)
+    return self.get_piece_movement(self.moving_vectors)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.LinearTransformationScene.write_vector_coordinates"><code class="name flex">
+<span>def <span class="ident">write_vector_coordinates</span></span>(<span>self, vector, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_vector_coordinates(self, vector, **kwargs):
+    coords = VectorScene.write_vector_coordinates(self, vector, **kwargs)
+    self.add_foreground_mobject(coords)
+    return coords</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="manimlib.scene.vector_space_scene.VectorScene" href="#manimlib.scene.vector_space_scene.VectorScene">VectorScene</a></b></code>:
+<ul class="hlist">
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.add" href="scene.html#manimlib.scene.scene.Scene.add">add</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.add_mobjects_among" href="scene.html#manimlib.scene.scene.Scene.add_mobjects_among">add_mobjects_among</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.compile_play_args_to_animation_list" href="scene.html#manimlib.scene.scene.Scene.compile_play_args_to_animation_list">compile_play_args_to_animation_list</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.restructure_mobjects" href="scene.html#manimlib.scene.scene.Scene.restructure_mobjects">restructure_mobjects</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.set_variables_as_attrs" href="scene.html#manimlib.scene.scene.Scene.set_variables_as_attrs">set_variables_as_attrs</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.setup" href="scene.html#manimlib.scene.scene.Scene.setup">setup</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene"><code class="flex name class">
+<span>class <span class="ident">VectorScene</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class VectorScene(Scene):
+    CONFIG = {
+        &#34;basis_vector_stroke_width&#34;: 6
+    }
+
+    def add_plane(self, animate=False, **kwargs):
+        plane = NumberPlane(**kwargs)
+        if animate:
+            self.play(ShowCreation(plane, lag_ratio=0.5))
+        self.add(plane)
+        return plane
+
+    def add_axes(self, animate=False, color=WHITE, **kwargs):
+        axes = Axes(color=color, tick_frequency=1)
+        if animate:
+            self.play(ShowCreation(axes))
+        self.add(axes)
+        return axes
+
+    def lock_in_faded_grid(self, dimness=0.7, axes_dimness=0.5):
+        plane = self.add_plane()
+        axes = plane.get_axes()
+        plane.fade(dimness)
+        axes.set_color(WHITE)
+        axes.fade(axes_dimness)
+        self.add(axes)
+        self.freeze_background()
+
+    def get_vector(self, numerical_vector, **kwargs):
+        return Arrow(
+            self.plane.coords_to_point(0, 0),
+            self.plane.coords_to_point(*numerical_vector[:2]),
+            buff=0,
+            **kwargs
+        )
+
+    def add_vector(self, vector, color=YELLOW, animate=True, **kwargs):
+        if not isinstance(vector, Arrow):
+            vector = Vector(vector, color=color, **kwargs)
+        if animate:
+            self.play(GrowArrow(vector))
+        self.add(vector)
+        return vector
+
+    def write_vector_coordinates(self, vector, **kwargs):
+        coords = vector_coordinate_label(vector, **kwargs)
+        self.play(Write(coords))
+        return coords
+
+    def get_basis_vectors(self, i_hat_color=X_COLOR, j_hat_color=Y_COLOR):
+        return VGroup(*[
+            Vector(
+                vect,
+                color=color,
+                stroke_width=self.basis_vector_stroke_width
+            )
+            for vect, color in [
+                ([1, 0], i_hat_color),
+                ([0, 1], j_hat_color)
+            ]
+        ])
+
+    def get_basis_vector_labels(self, **kwargs):
+        i_hat, j_hat = self.get_basis_vectors()
+        return VGroup(*[
+            self.get_vector_label(
+                vect, label, color=color,
+                label_scale_factor=1,
+                **kwargs
+            )
+            for vect, label, color in [
+                (i_hat, &#34;\\hat{\\imath}&#34;, X_COLOR),
+                (j_hat, &#34;\\hat{\\jmath}&#34;, Y_COLOR),
+            ]
+        ])
+
+    def get_vector_label(self, vector, label,
+                         at_tip=False,
+                         direction=&#34;left&#34;,
+                         rotate=False,
+                         color=None,
+                         label_scale_factor=VECTOR_LABEL_SCALE_FACTOR):
+        if not isinstance(label, TexMobject):
+            if len(label) == 1:
+                label = &#34;\\vec{\\textbf{%s}}&#34; % label
+            label = TexMobject(label)
+            if color is None:
+                color = vector.get_color()
+            label.set_color(color)
+        label.scale(label_scale_factor)
+        label.add_background_rectangle()
+
+        if at_tip:
+            vect = vector.get_vector()
+            vect /= get_norm(vect)
+            label.next_to(vector.get_end(), vect, buff=SMALL_BUFF)
+        else:
+            angle = vector.get_angle()
+            if not rotate:
+                label.rotate(-angle, about_point=ORIGIN)
+            if direction == &#34;left&#34;:
+                label.shift(-label.get_bottom() + 0.1 * UP)
+            else:
+                label.shift(-label.get_top() + 0.1 * DOWN)
+            label.rotate(angle, about_point=ORIGIN)
+            label.shift((vector.get_end() - vector.get_start()) / 2)
+        return label
+
+    def label_vector(self, vector, label, animate=True, **kwargs):
+        label = self.get_vector_label(vector, label, **kwargs)
+        if animate:
+            self.play(Write(label, run_time=1))
+        self.add(label)
+        return label
+
+    def position_x_coordinate(self, x_coord, x_line, vector):
+        x_coord.next_to(x_line, -np.sign(vector[1]) * UP)
+        x_coord.set_color(X_COLOR)
+        return x_coord
+
+    def position_y_coordinate(self, y_coord, y_line, vector):
+        y_coord.next_to(y_line, np.sign(vector[0]) * RIGHT)
+        y_coord.set_color(Y_COLOR)
+        return y_coord
+
+    def coords_to_vector(self, vector, coords_start=2 * RIGHT + 2 * UP, clean_up=True):
+        starting_mobjects = list(self.mobjects)
+        array = Matrix(vector)
+        array.shift(coords_start)
+        arrow = Vector(vector)
+        x_line = Line(ORIGIN, vector[0] * RIGHT)
+        y_line = Line(x_line.get_end(), arrow.get_end())
+        x_line.set_color(X_COLOR)
+        y_line.set_color(Y_COLOR)
+        x_coord, y_coord = array.get_mob_matrix().flatten()
+
+        self.play(Write(array, run_time=1))
+        self.wait()
+        self.play(ApplyFunction(
+            lambda x: self.position_x_coordinate(x, x_line, vector),
+            x_coord
+        ))
+        self.play(ShowCreation(x_line))
+        self.play(
+            ApplyFunction(
+                lambda y: self.position_y_coordinate(y, y_line, vector),
+                y_coord
+            ),
+            FadeOut(array.get_brackets())
+        )
+        y_coord, brackets = self.get_mobjects_from_last_animation()
+        self.play(ShowCreation(y_line))
+        self.play(ShowCreation(arrow))
+        self.wait()
+        if clean_up:
+            self.clear()
+            self.add(*starting_mobjects)
+
+    def vector_to_coords(self, vector, integer_labels=True, clean_up=True):
+        starting_mobjects = list(self.mobjects)
+        show_creation = False
+        if isinstance(vector, Arrow):
+            arrow = vector
+            vector = arrow.get_end()[:2]
+        else:
+            arrow = Vector(vector)
+            show_creation = True
+        array = vector_coordinate_label(arrow, integer_labels=integer_labels)
+        x_line = Line(ORIGIN, vector[0] * RIGHT)
+        y_line = Line(x_line.get_end(), arrow.get_end())
+        x_line.set_color(X_COLOR)
+        y_line.set_color(Y_COLOR)
+        x_coord, y_coord = array.get_mob_matrix().flatten()
+        x_coord_start = self.position_x_coordinate(
+            x_coord.copy(), x_line, vector
+        )
+        y_coord_start = self.position_y_coordinate(
+            y_coord.copy(), y_line, vector
+        )
+        brackets = array.get_brackets()
+
+        if show_creation:
+            self.play(ShowCreation(arrow))
+        self.play(
+            ShowCreation(x_line),
+            Write(x_coord_start),
+            run_time=1
+        )
+        self.play(
+            ShowCreation(y_line),
+            Write(y_coord_start),
+            run_time=1
+        )
+        self.wait()
+        self.play(
+            Transform(x_coord_start, x_coord, lag_ratio=0),
+            Transform(y_coord_start, y_coord, lag_ratio=0),
+            Write(brackets, run_time=1),
+        )
+        self.wait()
+
+        self.remove(x_coord_start, y_coord_start, brackets)
+        self.add(array)
+        if clean_up:
+            self.clear()
+            self.add(*starting_mobjects)
+        return array, x_line, y_line
+
+    def show_ghost_movement(self, vector):
+        if isinstance(vector, Arrow):
+            vector = vector.get_end() - vector.get_start()
+        elif len(vector) == 2:
+            vector = np.append(np.array(vector), 0.0)
+        x_max = int(FRAME_X_RADIUS + abs(vector[0]))
+        y_max = int(FRAME_Y_RADIUS + abs(vector[1]))
+        dots = VMobject(*[
+            Dot(x * RIGHT + y * UP)
+            for x in range(-x_max, x_max)
+            for y in range(-y_max, y_max)
+        ])
+        dots.set_fill(BLACK, opacity=0)
+        dots_halfway = dots.copy().shift(vector / 2).set_fill(WHITE, 1)
+        dots_end = dots.copy().shift(vector)
+
+        self.play(Transform(
+            dots, dots_halfway, rate_func=rush_into
+        ))
+        self.play(Transform(
+            dots, dots_end, rate_func=rush_from
+        ))
+        self.remove(dots)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="manimlib.scene.scene.Scene" href="scene.html#manimlib.scene.scene.Scene">Scene</a></li>
+<li><a title="manimlib.container.container.Container" href="../container/container.html#manimlib.container.container.Container">Container</a></li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="manimlib.scene.vector_space_scene.LinearTransformationScene" href="#manimlib.scene.vector_space_scene.LinearTransformationScene">LinearTransformationScene</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.CONFIG"><code class="name">var <span class="ident">CONFIG</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.add_axes"><code class="name flex">
+<span>def <span class="ident">add_axes</span></span>(<span>self, animate=False, color='#FFFFFF', **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_axes(self, animate=False, color=WHITE, **kwargs):
+    axes = Axes(color=color, tick_frequency=1)
+    if animate:
+        self.play(ShowCreation(axes))
+    self.add(axes)
+    return axes</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.add_plane"><code class="name flex">
+<span>def <span class="ident">add_plane</span></span>(<span>self, animate=False, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_plane(self, animate=False, **kwargs):
+    plane = NumberPlane(**kwargs)
+    if animate:
+        self.play(ShowCreation(plane, lag_ratio=0.5))
+    self.add(plane)
+    return plane</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.add_vector"><code class="name flex">
+<span>def <span class="ident">add_vector</span></span>(<span>self, vector, color='#FFFF00', animate=True, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_vector(self, vector, color=YELLOW, animate=True, **kwargs):
+    if not isinstance(vector, Arrow):
+        vector = Vector(vector, color=color, **kwargs)
+    if animate:
+        self.play(GrowArrow(vector))
+    self.add(vector)
+    return vector</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.coords_to_vector"><code class="name flex">
+<span>def <span class="ident">coords_to_vector</span></span>(<span>self, vector, coords_start=array([2., 2., 0.]), clean_up=True)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def coords_to_vector(self, vector, coords_start=2 * RIGHT + 2 * UP, clean_up=True):
+    starting_mobjects = list(self.mobjects)
+    array = Matrix(vector)
+    array.shift(coords_start)
+    arrow = Vector(vector)
+    x_line = Line(ORIGIN, vector[0] * RIGHT)
+    y_line = Line(x_line.get_end(), arrow.get_end())
+    x_line.set_color(X_COLOR)
+    y_line.set_color(Y_COLOR)
+    x_coord, y_coord = array.get_mob_matrix().flatten()
+
+    self.play(Write(array, run_time=1))
+    self.wait()
+    self.play(ApplyFunction(
+        lambda x: self.position_x_coordinate(x, x_line, vector),
+        x_coord
+    ))
+    self.play(ShowCreation(x_line))
+    self.play(
+        ApplyFunction(
+            lambda y: self.position_y_coordinate(y, y_line, vector),
+            y_coord
+        ),
+        FadeOut(array.get_brackets())
+    )
+    y_coord, brackets = self.get_mobjects_from_last_animation()
+    self.play(ShowCreation(y_line))
+    self.play(ShowCreation(arrow))
+    self.wait()
+    if clean_up:
+        self.clear()
+        self.add(*starting_mobjects)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.get_basis_vector_labels"><code class="name flex">
+<span>def <span class="ident">get_basis_vector_labels</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_basis_vector_labels(self, **kwargs):
+    i_hat, j_hat = self.get_basis_vectors()
+    return VGroup(*[
+        self.get_vector_label(
+            vect, label, color=color,
+            label_scale_factor=1,
+            **kwargs
+        )
+        for vect, label, color in [
+            (i_hat, &#34;\\hat{\\imath}&#34;, X_COLOR),
+            (j_hat, &#34;\\hat{\\jmath}&#34;, Y_COLOR),
+        ]
+    ])</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.get_basis_vectors"><code class="name flex">
+<span>def <span class="ident">get_basis_vectors</span></span>(<span>self, i_hat_color='#83C167', j_hat_color='#FC6255')</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_basis_vectors(self, i_hat_color=X_COLOR, j_hat_color=Y_COLOR):
+    return VGroup(*[
+        Vector(
+            vect,
+            color=color,
+            stroke_width=self.basis_vector_stroke_width
+        )
+        for vect, color in [
+            ([1, 0], i_hat_color),
+            ([0, 1], j_hat_color)
+        ]
+    ])</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.get_vector"><code class="name flex">
+<span>def <span class="ident">get_vector</span></span>(<span>self, numerical_vector, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_vector(self, numerical_vector, **kwargs):
+    return Arrow(
+        self.plane.coords_to_point(0, 0),
+        self.plane.coords_to_point(*numerical_vector[:2]),
+        buff=0,
+        **kwargs
+    )</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.get_vector_label"><code class="name flex">
+<span>def <span class="ident">get_vector_label</span></span>(<span>self, vector, label, at_tip=False, direction='left', rotate=False, color=None, label_scale_factor=0.8)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_vector_label(self, vector, label,
+                     at_tip=False,
+                     direction=&#34;left&#34;,
+                     rotate=False,
+                     color=None,
+                     label_scale_factor=VECTOR_LABEL_SCALE_FACTOR):
+    if not isinstance(label, TexMobject):
+        if len(label) == 1:
+            label = &#34;\\vec{\\textbf{%s}}&#34; % label
+        label = TexMobject(label)
+        if color is None:
+            color = vector.get_color()
+        label.set_color(color)
+    label.scale(label_scale_factor)
+    label.add_background_rectangle()
+
+    if at_tip:
+        vect = vector.get_vector()
+        vect /= get_norm(vect)
+        label.next_to(vector.get_end(), vect, buff=SMALL_BUFF)
+    else:
+        angle = vector.get_angle()
+        if not rotate:
+            label.rotate(-angle, about_point=ORIGIN)
+        if direction == &#34;left&#34;:
+            label.shift(-label.get_bottom() + 0.1 * UP)
+        else:
+            label.shift(-label.get_top() + 0.1 * DOWN)
+        label.rotate(angle, about_point=ORIGIN)
+        label.shift((vector.get_end() - vector.get_start()) / 2)
+    return label</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.label_vector"><code class="name flex">
+<span>def <span class="ident">label_vector</span></span>(<span>self, vector, label, animate=True, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def label_vector(self, vector, label, animate=True, **kwargs):
+    label = self.get_vector_label(vector, label, **kwargs)
+    if animate:
+        self.play(Write(label, run_time=1))
+    self.add(label)
+    return label</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.lock_in_faded_grid"><code class="name flex">
+<span>def <span class="ident">lock_in_faded_grid</span></span>(<span>self, dimness=0.7, axes_dimness=0.5)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def lock_in_faded_grid(self, dimness=0.7, axes_dimness=0.5):
+    plane = self.add_plane()
+    axes = plane.get_axes()
+    plane.fade(dimness)
+    axes.set_color(WHITE)
+    axes.fade(axes_dimness)
+    self.add(axes)
+    self.freeze_background()</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.position_x_coordinate"><code class="name flex">
+<span>def <span class="ident">position_x_coordinate</span></span>(<span>self, x_coord, x_line, vector)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def position_x_coordinate(self, x_coord, x_line, vector):
+    x_coord.next_to(x_line, -np.sign(vector[1]) * UP)
+    x_coord.set_color(X_COLOR)
+    return x_coord</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.position_y_coordinate"><code class="name flex">
+<span>def <span class="ident">position_y_coordinate</span></span>(<span>self, y_coord, y_line, vector)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def position_y_coordinate(self, y_coord, y_line, vector):
+    y_coord.next_to(y_line, np.sign(vector[0]) * RIGHT)
+    y_coord.set_color(Y_COLOR)
+    return y_coord</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.show_ghost_movement"><code class="name flex">
+<span>def <span class="ident">show_ghost_movement</span></span>(<span>self, vector)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_ghost_movement(self, vector):
+    if isinstance(vector, Arrow):
+        vector = vector.get_end() - vector.get_start()
+    elif len(vector) == 2:
+        vector = np.append(np.array(vector), 0.0)
+    x_max = int(FRAME_X_RADIUS + abs(vector[0]))
+    y_max = int(FRAME_Y_RADIUS + abs(vector[1]))
+    dots = VMobject(*[
+        Dot(x * RIGHT + y * UP)
+        for x in range(-x_max, x_max)
+        for y in range(-y_max, y_max)
+    ])
+    dots.set_fill(BLACK, opacity=0)
+    dots_halfway = dots.copy().shift(vector / 2).set_fill(WHITE, 1)
+    dots_end = dots.copy().shift(vector)
+
+    self.play(Transform(
+        dots, dots_halfway, rate_func=rush_into
+    ))
+    self.play(Transform(
+        dots, dots_end, rate_func=rush_from
+    ))
+    self.remove(dots)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.vector_to_coords"><code class="name flex">
+<span>def <span class="ident">vector_to_coords</span></span>(<span>self, vector, integer_labels=True, clean_up=True)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def vector_to_coords(self, vector, integer_labels=True, clean_up=True):
+    starting_mobjects = list(self.mobjects)
+    show_creation = False
+    if isinstance(vector, Arrow):
+        arrow = vector
+        vector = arrow.get_end()[:2]
+    else:
+        arrow = Vector(vector)
+        show_creation = True
+    array = vector_coordinate_label(arrow, integer_labels=integer_labels)
+    x_line = Line(ORIGIN, vector[0] * RIGHT)
+    y_line = Line(x_line.get_end(), arrow.get_end())
+    x_line.set_color(X_COLOR)
+    y_line.set_color(Y_COLOR)
+    x_coord, y_coord = array.get_mob_matrix().flatten()
+    x_coord_start = self.position_x_coordinate(
+        x_coord.copy(), x_line, vector
+    )
+    y_coord_start = self.position_y_coordinate(
+        y_coord.copy(), y_line, vector
+    )
+    brackets = array.get_brackets()
+
+    if show_creation:
+        self.play(ShowCreation(arrow))
+    self.play(
+        ShowCreation(x_line),
+        Write(x_coord_start),
+        run_time=1
+    )
+    self.play(
+        ShowCreation(y_line),
+        Write(y_coord_start),
+        run_time=1
+    )
+    self.wait()
+    self.play(
+        Transform(x_coord_start, x_coord, lag_ratio=0),
+        Transform(y_coord_start, y_coord, lag_ratio=0),
+        Write(brackets, run_time=1),
+    )
+    self.wait()
+
+    self.remove(x_coord_start, y_coord_start, brackets)
+    self.add(array)
+    if clean_up:
+        self.clear()
+        self.add(*starting_mobjects)
+    return array, x_line, y_line</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.vector_space_scene.VectorScene.write_vector_coordinates"><code class="name flex">
+<span>def <span class="ident">write_vector_coordinates</span></span>(<span>self, vector, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_vector_coordinates(self, vector, **kwargs):
+    coords = vector_coordinate_label(vector, **kwargs)
+    self.play(Write(coords))
+    return coords</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="manimlib.scene.scene.Scene" href="scene.html#manimlib.scene.scene.Scene">Scene</a></b></code>:
+<ul class="hlist">
+<li><code><a title="manimlib.scene.scene.Scene.add" href="scene.html#manimlib.scene.scene.Scene.add">add</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.add_mobjects_among" href="scene.html#manimlib.scene.scene.Scene.add_mobjects_among">add_mobjects_among</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.compile_play_args_to_animation_list" href="scene.html#manimlib.scene.scene.Scene.compile_play_args_to_animation_list">compile_play_args_to_animation_list</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.restructure_mobjects" href="scene.html#manimlib.scene.scene.Scene.restructure_mobjects">restructure_mobjects</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.set_variables_as_attrs" href="scene.html#manimlib.scene.scene.Scene.set_variables_as_attrs">set_variables_as_attrs</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.setup" href="scene.html#manimlib.scene.scene.Scene.setup">setup</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="manimlib.scene" href="index.html">manimlib.scene</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene" href="#manimlib.scene.vector_space_scene.LinearTransformationScene">LinearTransformationScene</a></code></h4>
+<ul class="">
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.CONFIG" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.CONFIG">CONFIG</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_background_mobject" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_background_mobject">add_background_mobject</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_foreground_mobject" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_foreground_mobject">add_foreground_mobject</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_moving_mobject" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_moving_mobject">add_moving_mobject</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_special_mobjects" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_special_mobjects">add_special_mobjects</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_title" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_title">add_title</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_transformable_label" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_transformable_label">add_transformable_label</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_transformable_mobject" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_transformable_mobject">add_transformable_mobject</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_unit_square" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_unit_square">add_unit_square</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.add_vector" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.add_vector">add_vector</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_function" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.apply_function">apply_function</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_inverse" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.apply_inverse">apply_inverse</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_inverse_transpose" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.apply_inverse_transpose">apply_inverse_transpose</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_matrix" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.apply_matrix">apply_matrix</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_nonlinear_transformation" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.apply_nonlinear_transformation">apply_nonlinear_transformation</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.apply_transposed_matrix" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.apply_transposed_matrix">apply_transposed_matrix</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.get_matrix_transformation" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.get_matrix_transformation">get_matrix_transformation</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.get_moving_mobject_movement" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.get_moving_mobject_movement">get_moving_mobject_movement</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.get_piece_movement" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.get_piece_movement">get_piece_movement</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.get_transformable_label_movement" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.get_transformable_label_movement">get_transformable_label_movement</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.get_transposed_matrix_transformation" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.get_transposed_matrix_transformation">get_transposed_matrix_transformation</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.get_unit_square" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.get_unit_square">get_unit_square</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.get_vector_movement" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.get_vector_movement">get_vector_movement</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.LinearTransformationScene.write_vector_coordinates" href="#manimlib.scene.vector_space_scene.LinearTransformationScene.write_vector_coordinates">write_vector_coordinates</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="manimlib.scene.vector_space_scene.VectorScene" href="#manimlib.scene.vector_space_scene.VectorScene">VectorScene</a></code></h4>
+<ul class="">
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.CONFIG" href="#manimlib.scene.vector_space_scene.VectorScene.CONFIG">CONFIG</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.add_axes" href="#manimlib.scene.vector_space_scene.VectorScene.add_axes">add_axes</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.add_plane" href="#manimlib.scene.vector_space_scene.VectorScene.add_plane">add_plane</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.add_vector" href="#manimlib.scene.vector_space_scene.VectorScene.add_vector">add_vector</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.coords_to_vector" href="#manimlib.scene.vector_space_scene.VectorScene.coords_to_vector">coords_to_vector</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.get_basis_vector_labels" href="#manimlib.scene.vector_space_scene.VectorScene.get_basis_vector_labels">get_basis_vector_labels</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.get_basis_vectors" href="#manimlib.scene.vector_space_scene.VectorScene.get_basis_vectors">get_basis_vectors</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.get_vector" href="#manimlib.scene.vector_space_scene.VectorScene.get_vector">get_vector</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.get_vector_label" href="#manimlib.scene.vector_space_scene.VectorScene.get_vector_label">get_vector_label</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.label_vector" href="#manimlib.scene.vector_space_scene.VectorScene.label_vector">label_vector</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.lock_in_faded_grid" href="#manimlib.scene.vector_space_scene.VectorScene.lock_in_faded_grid">lock_in_faded_grid</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.position_x_coordinate" href="#manimlib.scene.vector_space_scene.VectorScene.position_x_coordinate">position_x_coordinate</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.position_y_coordinate" href="#manimlib.scene.vector_space_scene.VectorScene.position_y_coordinate">position_y_coordinate</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.show_ghost_movement" href="#manimlib.scene.vector_space_scene.VectorScene.show_ghost_movement">show_ghost_movement</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.vector_to_coords" href="#manimlib.scene.vector_space_scene.VectorScene.vector_to_coords">vector_to_coords</a></code></li>
+<li><code><a title="manimlib.scene.vector_space_scene.VectorScene.write_vector_coordinates" href="#manimlib.scene.vector_space_scene.VectorScene.write_vector_coordinates">write_vector_coordinates</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

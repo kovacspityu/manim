@@ -1,0 +1,1939 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>manimlib.scene.graph_scene API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>manimlib.scene.graph_scene</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import itertools as it
+
+from manimlib.animation.creation import Write, DrawBorderThenFill, ShowCreation
+from manimlib.animation.transform import Transform
+from manimlib.animation.update import UpdateFromAlphaFunc
+from manimlib.constants import *
+from manimlib.mobject.functions import ParametricFunction
+from manimlib.mobject.geometry import Line
+from manimlib.mobject.geometry import Rectangle
+from manimlib.mobject.geometry import RegularPolygon
+from manimlib.mobject.number_line import NumberLine
+from manimlib.mobject.svg.tex_mobject import TexMobject
+from manimlib.mobject.svg.tex_mobject import TextMobject
+from manimlib.mobject.types.vectorized_mobject import VGroup
+from manimlib.mobject.types.vectorized_mobject import VectorizedPoint
+from manimlib.scene.scene import Scene
+from manimlib.utils.bezier import interpolate
+from manimlib.utils.color import color_gradient
+from manimlib.utils.color import invert_color
+from manimlib.utils.space_ops import angle_of_vector
+
+# TODO, this should probably reimplemented entirely, especially so as to
+# better reuse code from mobject/coordinate_systems.
+# Also, I really dislike how the configuration is set up, this
+# is way too messy to work with.
+
+
+class GraphScene(Scene):
+    CONFIG = {
+        &#34;x_min&#34;: -1,
+        &#34;x_max&#34;: 10,
+        &#34;x_axis_width&#34;: 9,
+        &#34;x_tick_frequency&#34;: 1,
+        &#34;x_leftmost_tick&#34;: None,  # Change if different from x_min
+        &#34;x_labeled_nums&#34;: None,
+        &#34;x_axis_label&#34;: &#34;$x$&#34;,
+        &#34;y_min&#34;: -1,
+        &#34;y_max&#34;: 10,
+        &#34;y_axis_height&#34;: 6,
+        &#34;y_tick_frequency&#34;: 1,
+        &#34;y_bottom_tick&#34;: None,  # Change if different from y_min
+        &#34;y_labeled_nums&#34;: None,
+        &#34;y_axis_label&#34;: &#34;$y$&#34;,
+        &#34;axes_color&#34;: GREY,
+        &#34;graph_origin&#34;: 2.5 * DOWN + 4 * LEFT,
+        &#34;exclude_zero_label&#34;: True,
+        &#34;default_graph_colors&#34;: [BLUE, GREEN, YELLOW],
+        &#34;default_derivative_color&#34;: GREEN,
+        &#34;default_input_color&#34;: YELLOW,
+        &#34;default_riemann_start_color&#34;: BLUE,
+        &#34;default_riemann_end_color&#34;: GREEN,
+        &#34;area_opacity&#34;: 0.8,
+        &#34;num_rects&#34;: 50,
+    }
+
+    def setup(self):
+        self.default_graph_colors_cycle = it.cycle(self.default_graph_colors)
+
+        self.left_T_label = VGroup()
+        self.left_v_line = VGroup()
+        self.right_T_label = VGroup()
+        self.right_v_line = VGroup()
+
+    def setup_axes(self, animate=False):
+        # TODO, once eoc is done, refactor this to be less redundant.
+        x_num_range = float(self.x_max - self.x_min)
+        self.space_unit_to_x = self.x_axis_width / x_num_range
+        if self.x_labeled_nums is None:
+            self.x_labeled_nums = []
+        if self.x_leftmost_tick is None:
+            self.x_leftmost_tick = self.x_min
+        x_axis = NumberLine(
+            x_min=self.x_min,
+            x_max=self.x_max,
+            unit_size=self.space_unit_to_x,
+            tick_frequency=self.x_tick_frequency,
+            leftmost_tick=self.x_leftmost_tick,
+            numbers_with_elongated_ticks=self.x_labeled_nums,
+            color=self.axes_color
+        )
+        x_axis.shift(self.graph_origin - x_axis.number_to_point(0))
+        if len(self.x_labeled_nums) &gt; 0:
+            if self.exclude_zero_label:
+                self.x_labeled_nums = [x for x in self.x_labeled_nums if x != 0]
+            x_axis.add_numbers(*self.x_labeled_nums)
+        if self.x_axis_label:
+            x_label = TextMobject(self.x_axis_label)
+            x_label.next_to(
+                x_axis.get_tick_marks(), UP + RIGHT,
+                buff=SMALL_BUFF
+            )
+            x_label.shift_onto_screen()
+            x_axis.add(x_label)
+            self.x_axis_label_mob = x_label
+
+        y_num_range = float(self.y_max - self.y_min)
+        self.space_unit_to_y = self.y_axis_height / y_num_range
+
+        if self.y_labeled_nums is None:
+            self.y_labeled_nums = []
+        if self.y_bottom_tick is None:
+            self.y_bottom_tick = self.y_min
+        y_axis = NumberLine(
+            x_min=self.y_min,
+            x_max=self.y_max,
+            unit_size=self.space_unit_to_y,
+            tick_frequency=self.y_tick_frequency,
+            leftmost_tick=self.y_bottom_tick,
+            numbers_with_elongated_ticks=self.y_labeled_nums,
+            color=self.axes_color,
+            line_to_number_vect=LEFT,
+            label_direction=LEFT,
+        )
+        y_axis.shift(self.graph_origin - y_axis.number_to_point(0))
+        y_axis.rotate(np.pi / 2, about_point=y_axis.number_to_point(0))
+        if len(self.y_labeled_nums) &gt; 0:
+            if self.exclude_zero_label:
+                self.y_labeled_nums = [y for y in self.y_labeled_nums if y != 0]
+            y_axis.add_numbers(*self.y_labeled_nums)
+        if self.y_axis_label:
+            y_label = TextMobject(self.y_axis_label)
+            y_label.next_to(
+                y_axis.get_corner(UP + RIGHT), UP + RIGHT,
+                buff=SMALL_BUFF
+            )
+            y_label.shift_onto_screen()
+            y_axis.add(y_label)
+            self.y_axis_label_mob = y_label
+
+        if animate:
+            self.play(Write(VGroup(x_axis, y_axis)))
+        else:
+            self.add(x_axis, y_axis)
+        self.x_axis, self.y_axis = self.axes = VGroup(x_axis, y_axis)
+        self.default_graph_colors = it.cycle(self.default_graph_colors)
+
+    def coords_to_point(self, x, y):
+        assert(hasattr(self, &#34;x_axis&#34;) and hasattr(self, &#34;y_axis&#34;))
+        result = self.x_axis.number_to_point(x)[0] * RIGHT
+        result += self.y_axis.number_to_point(y)[1] * UP
+        return result
+
+    def point_to_coords(self, point):
+        return (self.x_axis.point_to_number(point),
+                self.y_axis.point_to_number(point))
+
+    def get_graph(
+        self, func,
+        color=None,
+        x_min=None,
+        x_max=None,
+        **kwargs
+    ):
+        if color is None:
+            color = next(self.default_graph_colors_cycle)
+        if x_min is None:
+            x_min = self.x_min
+        if x_max is None:
+            x_max = self.x_max
+
+        def parameterized_function(alpha):
+            x = interpolate(x_min, x_max, alpha)
+            y = func(x)
+            if not np.isfinite(y):
+                y = self.y_max
+            return self.coords_to_point(x, y)
+
+        graph = ParametricFunction(
+            parameterized_function,
+            color=color,
+            **kwargs
+        )
+        graph.underlying_function = func
+        return graph
+
+    def input_to_graph_point(self, x, graph):
+        return self.coords_to_point(x, graph.underlying_function(x))
+
+    def angle_of_tangent(self, x, graph, dx=0.01):
+        vect = self.input_to_graph_point(
+            x + dx, graph) - self.input_to_graph_point(x, graph)
+        return angle_of_vector(vect)
+
+    def slope_of_tangent(self, *args, **kwargs):
+        return np.tan(self.angle_of_tangent(*args, **kwargs))
+
+    def get_derivative_graph(self, graph, dx=0.01, **kwargs):
+        if &#34;color&#34; not in kwargs:
+            kwargs[&#34;color&#34;] = self.default_derivative_color
+
+        def deriv(x):
+            return self.slope_of_tangent(x, graph, dx) / self.space_unit_to_y
+        return self.get_graph(deriv, **kwargs)
+
+    def get_graph_label(
+        self,
+        graph,
+        label=&#34;f(x)&#34;,
+        x_val=None,
+        direction=RIGHT,
+        buff=MED_SMALL_BUFF,
+        color=None,
+    ):
+        label = TexMobject(label)
+        color = color or graph.get_color()
+        label.set_color(color)
+        if x_val is None:
+            # Search from right to left
+            for x in np.linspace(self.x_max, self.x_min, 100):
+                point = self.input_to_graph_point(x, graph)
+                if point[1] &lt; FRAME_Y_RADIUS:
+                    break
+            x_val = x
+        label.next_to(
+            self.input_to_graph_point(x_val, graph),
+            direction,
+            buff=buff
+        )
+        label.shift_onto_screen()
+        return label
+
+    def get_riemann_rectangles(
+        self,
+        graph,
+        x_min=None,
+        x_max=None,
+        dx=0.1,
+        input_sample_type=&#34;left&#34;,
+        stroke_width=1,
+        stroke_color=BLACK,
+        fill_opacity=1,
+        start_color=None,
+        end_color=None,
+        show_signed_area=True,
+        width_scale_factor=1.001
+    ):
+        x_min = x_min if x_min is not None else self.x_min
+        x_max = x_max if x_max is not None else self.x_max
+        if start_color is None:
+            start_color = self.default_riemann_start_color
+        if end_color is None:
+            end_color = self.default_riemann_end_color
+        rectangles = VGroup()
+        x_range = np.arange(x_min, x_max, dx)
+        colors = color_gradient([start_color, end_color], len(x_range))
+        for x, color in zip(x_range, colors):
+            if input_sample_type == &#34;left&#34;:
+                sample_input = x
+            elif input_sample_type == &#34;right&#34;:
+                sample_input = x + dx
+            elif input_sample_type == &#34;center&#34;:
+                sample_input = x + 0.5 * dx
+            else:
+                raise Exception(&#34;Invalid input sample type&#34;)
+            graph_point = self.input_to_graph_point(sample_input, graph)
+            points = VGroup(*list(map(VectorizedPoint, [
+                self.coords_to_point(x, 0),
+                self.coords_to_point(x + width_scale_factor * dx, 0),
+                graph_point
+            ])))
+
+            rect = Rectangle()
+            rect.replace(points, stretch=True)
+            if graph_point[1] &lt; self.graph_origin[1] and show_signed_area:
+                fill_color = invert_color(color)
+            else:
+                fill_color = color
+            rect.set_fill(fill_color, opacity=fill_opacity)
+            rect.set_stroke(stroke_color, width=stroke_width)
+            rectangles.add(rect)
+        return rectangles
+
+    def get_riemann_rectangles_list(
+        self,
+        graph,
+        n_iterations,
+        max_dx=0.5,
+        power_base=2,
+        stroke_width=1,
+        **kwargs
+    ):
+        return [
+            self.get_riemann_rectangles(
+                graph=graph,
+                dx=float(max_dx) / (power_base**n),
+                stroke_width=float(stroke_width) / (power_base**n),
+                **kwargs
+            )
+            for n in range(n_iterations)
+        ]
+
+    def get_area(self, graph, t_min, t_max):
+        numerator = max(t_max - t_min, 0.0001)
+        dx = float(numerator) / self.num_rects
+        return self.get_riemann_rectangles(
+            graph,
+            x_min=t_min,
+            x_max=t_max,
+            dx=dx,
+            stroke_width=0,
+        ).set_fill(opacity=self.area_opacity)
+
+    def transform_between_riemann_rects(self, curr_rects, new_rects, **kwargs):
+        transform_kwargs = {
+            &#34;run_time&#34;: 2,
+            &#34;lag_ratio&#34;: 0.5
+        }
+        added_anims = kwargs.get(&#34;added_anims&#34;, [])
+        transform_kwargs.update(kwargs)
+        curr_rects.align_submobjects(new_rects)
+        x_coords = set()  # Keep track of new repetitions
+        for rect in curr_rects:
+            x = rect.get_center()[0]
+            if x in x_coords:
+                rect.set_fill(opacity=0)
+            else:
+                x_coords.add(x)
+        self.play(
+            Transform(curr_rects, new_rects, **transform_kwargs),
+            *added_anims
+        )
+
+    def get_vertical_line_to_graph(
+        self,
+        x, graph,
+        line_class=Line,
+        **line_kwargs
+    ):
+        if &#34;color&#34; not in line_kwargs:
+            line_kwargs[&#34;color&#34;] = graph.get_color()
+        return line_class(
+            self.coords_to_point(x, 0),
+            self.input_to_graph_point(x, graph),
+            **line_kwargs
+        )
+
+    def get_vertical_lines_to_graph(
+        self, graph,
+        x_min=None,
+        x_max=None,
+        num_lines=20,
+        **kwargs
+    ):
+        x_min = x_min or self.x_min
+        x_max = x_max or self.x_max
+        return VGroup(*[
+            self.get_vertical_line_to_graph(x, graph, **kwargs)
+            for x in np.linspace(x_min, x_max, num_lines)
+        ])
+
+    def get_secant_slope_group(
+        self,
+        x, graph,
+        dx=None,
+        dx_line_color=None,
+        df_line_color=None,
+        dx_label=None,
+        df_label=None,
+        include_secant_line=True,
+        secant_line_color=None,
+        secant_line_length=10,
+    ):
+        &#34;&#34;&#34;
+        Resulting group is of the form VGroup(
+            dx_line,
+            df_line,
+            dx_label, (if applicable)
+            df_label, (if applicable)
+            secant_line, (if applicable)
+        )
+        with attributes of those names.
+        &#34;&#34;&#34;
+        kwargs = locals()
+        kwargs.pop(&#34;self&#34;)
+        group = VGroup()
+        group.kwargs = kwargs
+
+        dx = dx or float(self.x_max - self.x_min) / 10
+        dx_line_color = dx_line_color or self.default_input_color
+        df_line_color = df_line_color or graph.get_color()
+
+        p1 = self.input_to_graph_point(x, graph)
+        p2 = self.input_to_graph_point(x + dx, graph)
+        interim_point = p2[0] * RIGHT + p1[1] * UP
+
+        group.dx_line = Line(
+            p1, interim_point,
+            color=dx_line_color
+        )
+        group.df_line = Line(
+            interim_point, p2,
+            color=df_line_color
+        )
+        group.add(group.dx_line, group.df_line)
+
+        labels = VGroup()
+        if dx_label is not None:
+            group.dx_label = TexMobject(dx_label)
+            labels.add(group.dx_label)
+            group.add(group.dx_label)
+        if df_label is not None:
+            group.df_label = TexMobject(df_label)
+            labels.add(group.df_label)
+            group.add(group.df_label)
+
+        if len(labels) &gt; 0:
+            max_width = 0.8 * group.dx_line.get_width()
+            max_height = 0.8 * group.df_line.get_height()
+            if labels.get_width() &gt; max_width:
+                labels.set_width(max_width)
+            if labels.get_height() &gt; max_height:
+                labels.set_height(max_height)
+
+        if dx_label is not None:
+            group.dx_label.next_to(
+                group.dx_line,
+                np.sign(dx) * DOWN,
+                buff=group.dx_label.get_height() / 2
+            )
+            group.dx_label.set_color(group.dx_line.get_color())
+
+        if df_label is not None:
+            group.df_label.next_to(
+                group.df_line,
+                np.sign(dx) * RIGHT,
+                buff=group.df_label.get_height() / 2
+            )
+            group.df_label.set_color(group.df_line.get_color())
+
+        if include_secant_line:
+            secant_line_color = secant_line_color or self.default_derivative_color
+            group.secant_line = Line(p1, p2, color=secant_line_color)
+            group.secant_line.scale_in_place(
+                secant_line_length / group.secant_line.get_length()
+            )
+            group.add(group.secant_line)
+
+        return group
+
+    def add_T_label(self, x_val, side=RIGHT, label=None, color=WHITE, animated=False, **kwargs):
+        triangle = RegularPolygon(n=3, start_angle=np.pi / 2)
+        triangle.set_height(MED_SMALL_BUFF)
+        triangle.move_to(self.coords_to_point(x_val, 0), UP)
+        triangle.set_fill(color, 1)
+        triangle.set_stroke(width=0)
+        if label is None:
+            T_label = TexMobject(self.variable_point_label, fill_color=color)
+        else:
+            T_label = TexMobject(label, fill_color=color)
+
+        T_label.next_to(triangle, DOWN)
+        v_line = self.get_vertical_line_to_graph(
+            x_val, self.v_graph,
+            color=YELLOW
+        )
+
+        if animated:
+            self.play(
+                DrawBorderThenFill(triangle),
+                ShowCreation(v_line),
+                Write(T_label, run_time=1),
+                **kwargs
+            )
+
+        if np.all(side == LEFT):
+            self.left_T_label_group = VGroup(T_label, triangle)
+            self.left_v_line = v_line
+            self.add(self.left_T_label_group, self.left_v_line)
+        elif np.all(side == RIGHT):
+            self.right_T_label_group = VGroup(T_label, triangle)
+            self.right_v_line = v_line
+            self.add(self.right_T_label_group, self.right_v_line)
+
+    def get_animation_integral_bounds_change(
+        self,
+        graph,
+        new_t_min,
+        new_t_max,
+        fade_close_to_origin=True,
+        run_time=1.0
+    ):
+        curr_t_min = self.x_axis.point_to_number(self.area.get_left())
+        curr_t_max = self.x_axis.point_to_number(self.area.get_right())
+        if new_t_min is None:
+            new_t_min = curr_t_min
+        if new_t_max is None:
+            new_t_max = curr_t_max
+
+        group = VGroup(self.area)
+        group.add(self.left_v_line)
+        group.add(self.left_T_label_group)
+        group.add(self.right_v_line)
+        group.add(self.right_T_label_group)
+
+        def update_group(group, alpha):
+            area, left_v_line, left_T_label, right_v_line, right_T_label = group
+            t_min = interpolate(curr_t_min, new_t_min, alpha)
+            t_max = interpolate(curr_t_max, new_t_max, alpha)
+            new_area = self.get_area(graph, t_min, t_max)
+
+            new_left_v_line = self.get_vertical_line_to_graph(
+                t_min, graph
+            )
+            new_left_v_line.set_color(left_v_line.get_color())
+            left_T_label.move_to(new_left_v_line.get_bottom(), UP)
+
+            new_right_v_line = self.get_vertical_line_to_graph(
+                t_max, graph
+            )
+            new_right_v_line.set_color(right_v_line.get_color())
+            right_T_label.move_to(new_right_v_line.get_bottom(), UP)
+
+            # Fade close to 0
+            if fade_close_to_origin:
+                if len(left_T_label) &gt; 0:
+                    left_T_label[0].set_fill(opacity=min(1, np.abs(t_min)))
+                if len(right_T_label) &gt; 0:
+                    right_T_label[0].set_fill(opacity=min(1, np.abs(t_max)))
+
+            Transform(area, new_area).update(1)
+            Transform(left_v_line, new_left_v_line).update(1)
+            Transform(right_v_line, new_right_v_line).update(1)
+            return group
+
+        return UpdateFromAlphaFunc(group, update_group, run_time=run_time)
+
+    def animate_secant_slope_group_change(
+        self, secant_slope_group,
+        target_dx=None,
+        target_x=None,
+        run_time=3,
+        added_anims=None,
+        **anim_kwargs
+    ):
+        if target_dx is None and target_x is None:
+            raise Exception(
+                &#34;At least one of target_x and target_dx must not be None&#34;)
+        if added_anims is None:
+            added_anims = []
+
+        start_dx = secant_slope_group.kwargs[&#34;dx&#34;]
+        start_x = secant_slope_group.kwargs[&#34;x&#34;]
+        if target_dx is None:
+            target_dx = start_dx
+        if target_x is None:
+            target_x = start_x
+
+        def update_func(group, alpha):
+            dx = interpolate(start_dx, target_dx, alpha)
+            x = interpolate(start_x, target_x, alpha)
+            kwargs = dict(secant_slope_group.kwargs)
+            kwargs[&#34;dx&#34;] = dx
+            kwargs[&#34;x&#34;] = x
+            new_group = self.get_secant_slope_group(**kwargs)
+            group.become(new_group)
+            return group
+
+        self.play(
+            UpdateFromAlphaFunc(
+                secant_slope_group, update_func,
+                run_time=run_time,
+                **anim_kwargs
+            ),
+            *added_anims
+        )
+        secant_slope_group.kwargs[&#34;x&#34;] = target_x
+        secant_slope_group.kwargs[&#34;dx&#34;] = target_dx</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="manimlib.scene.graph_scene.GraphScene"><code class="flex name class">
+<span>class <span class="ident">GraphScene</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GraphScene(Scene):
+    CONFIG = {
+        &#34;x_min&#34;: -1,
+        &#34;x_max&#34;: 10,
+        &#34;x_axis_width&#34;: 9,
+        &#34;x_tick_frequency&#34;: 1,
+        &#34;x_leftmost_tick&#34;: None,  # Change if different from x_min
+        &#34;x_labeled_nums&#34;: None,
+        &#34;x_axis_label&#34;: &#34;$x$&#34;,
+        &#34;y_min&#34;: -1,
+        &#34;y_max&#34;: 10,
+        &#34;y_axis_height&#34;: 6,
+        &#34;y_tick_frequency&#34;: 1,
+        &#34;y_bottom_tick&#34;: None,  # Change if different from y_min
+        &#34;y_labeled_nums&#34;: None,
+        &#34;y_axis_label&#34;: &#34;$y$&#34;,
+        &#34;axes_color&#34;: GREY,
+        &#34;graph_origin&#34;: 2.5 * DOWN + 4 * LEFT,
+        &#34;exclude_zero_label&#34;: True,
+        &#34;default_graph_colors&#34;: [BLUE, GREEN, YELLOW],
+        &#34;default_derivative_color&#34;: GREEN,
+        &#34;default_input_color&#34;: YELLOW,
+        &#34;default_riemann_start_color&#34;: BLUE,
+        &#34;default_riemann_end_color&#34;: GREEN,
+        &#34;area_opacity&#34;: 0.8,
+        &#34;num_rects&#34;: 50,
+    }
+
+    def setup(self):
+        self.default_graph_colors_cycle = it.cycle(self.default_graph_colors)
+
+        self.left_T_label = VGroup()
+        self.left_v_line = VGroup()
+        self.right_T_label = VGroup()
+        self.right_v_line = VGroup()
+
+    def setup_axes(self, animate=False):
+        # TODO, once eoc is done, refactor this to be less redundant.
+        x_num_range = float(self.x_max - self.x_min)
+        self.space_unit_to_x = self.x_axis_width / x_num_range
+        if self.x_labeled_nums is None:
+            self.x_labeled_nums = []
+        if self.x_leftmost_tick is None:
+            self.x_leftmost_tick = self.x_min
+        x_axis = NumberLine(
+            x_min=self.x_min,
+            x_max=self.x_max,
+            unit_size=self.space_unit_to_x,
+            tick_frequency=self.x_tick_frequency,
+            leftmost_tick=self.x_leftmost_tick,
+            numbers_with_elongated_ticks=self.x_labeled_nums,
+            color=self.axes_color
+        )
+        x_axis.shift(self.graph_origin - x_axis.number_to_point(0))
+        if len(self.x_labeled_nums) &gt; 0:
+            if self.exclude_zero_label:
+                self.x_labeled_nums = [x for x in self.x_labeled_nums if x != 0]
+            x_axis.add_numbers(*self.x_labeled_nums)
+        if self.x_axis_label:
+            x_label = TextMobject(self.x_axis_label)
+            x_label.next_to(
+                x_axis.get_tick_marks(), UP + RIGHT,
+                buff=SMALL_BUFF
+            )
+            x_label.shift_onto_screen()
+            x_axis.add(x_label)
+            self.x_axis_label_mob = x_label
+
+        y_num_range = float(self.y_max - self.y_min)
+        self.space_unit_to_y = self.y_axis_height / y_num_range
+
+        if self.y_labeled_nums is None:
+            self.y_labeled_nums = []
+        if self.y_bottom_tick is None:
+            self.y_bottom_tick = self.y_min
+        y_axis = NumberLine(
+            x_min=self.y_min,
+            x_max=self.y_max,
+            unit_size=self.space_unit_to_y,
+            tick_frequency=self.y_tick_frequency,
+            leftmost_tick=self.y_bottom_tick,
+            numbers_with_elongated_ticks=self.y_labeled_nums,
+            color=self.axes_color,
+            line_to_number_vect=LEFT,
+            label_direction=LEFT,
+        )
+        y_axis.shift(self.graph_origin - y_axis.number_to_point(0))
+        y_axis.rotate(np.pi / 2, about_point=y_axis.number_to_point(0))
+        if len(self.y_labeled_nums) &gt; 0:
+            if self.exclude_zero_label:
+                self.y_labeled_nums = [y for y in self.y_labeled_nums if y != 0]
+            y_axis.add_numbers(*self.y_labeled_nums)
+        if self.y_axis_label:
+            y_label = TextMobject(self.y_axis_label)
+            y_label.next_to(
+                y_axis.get_corner(UP + RIGHT), UP + RIGHT,
+                buff=SMALL_BUFF
+            )
+            y_label.shift_onto_screen()
+            y_axis.add(y_label)
+            self.y_axis_label_mob = y_label
+
+        if animate:
+            self.play(Write(VGroup(x_axis, y_axis)))
+        else:
+            self.add(x_axis, y_axis)
+        self.x_axis, self.y_axis = self.axes = VGroup(x_axis, y_axis)
+        self.default_graph_colors = it.cycle(self.default_graph_colors)
+
+    def coords_to_point(self, x, y):
+        assert(hasattr(self, &#34;x_axis&#34;) and hasattr(self, &#34;y_axis&#34;))
+        result = self.x_axis.number_to_point(x)[0] * RIGHT
+        result += self.y_axis.number_to_point(y)[1] * UP
+        return result
+
+    def point_to_coords(self, point):
+        return (self.x_axis.point_to_number(point),
+                self.y_axis.point_to_number(point))
+
+    def get_graph(
+        self, func,
+        color=None,
+        x_min=None,
+        x_max=None,
+        **kwargs
+    ):
+        if color is None:
+            color = next(self.default_graph_colors_cycle)
+        if x_min is None:
+            x_min = self.x_min
+        if x_max is None:
+            x_max = self.x_max
+
+        def parameterized_function(alpha):
+            x = interpolate(x_min, x_max, alpha)
+            y = func(x)
+            if not np.isfinite(y):
+                y = self.y_max
+            return self.coords_to_point(x, y)
+
+        graph = ParametricFunction(
+            parameterized_function,
+            color=color,
+            **kwargs
+        )
+        graph.underlying_function = func
+        return graph
+
+    def input_to_graph_point(self, x, graph):
+        return self.coords_to_point(x, graph.underlying_function(x))
+
+    def angle_of_tangent(self, x, graph, dx=0.01):
+        vect = self.input_to_graph_point(
+            x + dx, graph) - self.input_to_graph_point(x, graph)
+        return angle_of_vector(vect)
+
+    def slope_of_tangent(self, *args, **kwargs):
+        return np.tan(self.angle_of_tangent(*args, **kwargs))
+
+    def get_derivative_graph(self, graph, dx=0.01, **kwargs):
+        if &#34;color&#34; not in kwargs:
+            kwargs[&#34;color&#34;] = self.default_derivative_color
+
+        def deriv(x):
+            return self.slope_of_tangent(x, graph, dx) / self.space_unit_to_y
+        return self.get_graph(deriv, **kwargs)
+
+    def get_graph_label(
+        self,
+        graph,
+        label=&#34;f(x)&#34;,
+        x_val=None,
+        direction=RIGHT,
+        buff=MED_SMALL_BUFF,
+        color=None,
+    ):
+        label = TexMobject(label)
+        color = color or graph.get_color()
+        label.set_color(color)
+        if x_val is None:
+            # Search from right to left
+            for x in np.linspace(self.x_max, self.x_min, 100):
+                point = self.input_to_graph_point(x, graph)
+                if point[1] &lt; FRAME_Y_RADIUS:
+                    break
+            x_val = x
+        label.next_to(
+            self.input_to_graph_point(x_val, graph),
+            direction,
+            buff=buff
+        )
+        label.shift_onto_screen()
+        return label
+
+    def get_riemann_rectangles(
+        self,
+        graph,
+        x_min=None,
+        x_max=None,
+        dx=0.1,
+        input_sample_type=&#34;left&#34;,
+        stroke_width=1,
+        stroke_color=BLACK,
+        fill_opacity=1,
+        start_color=None,
+        end_color=None,
+        show_signed_area=True,
+        width_scale_factor=1.001
+    ):
+        x_min = x_min if x_min is not None else self.x_min
+        x_max = x_max if x_max is not None else self.x_max
+        if start_color is None:
+            start_color = self.default_riemann_start_color
+        if end_color is None:
+            end_color = self.default_riemann_end_color
+        rectangles = VGroup()
+        x_range = np.arange(x_min, x_max, dx)
+        colors = color_gradient([start_color, end_color], len(x_range))
+        for x, color in zip(x_range, colors):
+            if input_sample_type == &#34;left&#34;:
+                sample_input = x
+            elif input_sample_type == &#34;right&#34;:
+                sample_input = x + dx
+            elif input_sample_type == &#34;center&#34;:
+                sample_input = x + 0.5 * dx
+            else:
+                raise Exception(&#34;Invalid input sample type&#34;)
+            graph_point = self.input_to_graph_point(sample_input, graph)
+            points = VGroup(*list(map(VectorizedPoint, [
+                self.coords_to_point(x, 0),
+                self.coords_to_point(x + width_scale_factor * dx, 0),
+                graph_point
+            ])))
+
+            rect = Rectangle()
+            rect.replace(points, stretch=True)
+            if graph_point[1] &lt; self.graph_origin[1] and show_signed_area:
+                fill_color = invert_color(color)
+            else:
+                fill_color = color
+            rect.set_fill(fill_color, opacity=fill_opacity)
+            rect.set_stroke(stroke_color, width=stroke_width)
+            rectangles.add(rect)
+        return rectangles
+
+    def get_riemann_rectangles_list(
+        self,
+        graph,
+        n_iterations,
+        max_dx=0.5,
+        power_base=2,
+        stroke_width=1,
+        **kwargs
+    ):
+        return [
+            self.get_riemann_rectangles(
+                graph=graph,
+                dx=float(max_dx) / (power_base**n),
+                stroke_width=float(stroke_width) / (power_base**n),
+                **kwargs
+            )
+            for n in range(n_iterations)
+        ]
+
+    def get_area(self, graph, t_min, t_max):
+        numerator = max(t_max - t_min, 0.0001)
+        dx = float(numerator) / self.num_rects
+        return self.get_riemann_rectangles(
+            graph,
+            x_min=t_min,
+            x_max=t_max,
+            dx=dx,
+            stroke_width=0,
+        ).set_fill(opacity=self.area_opacity)
+
+    def transform_between_riemann_rects(self, curr_rects, new_rects, **kwargs):
+        transform_kwargs = {
+            &#34;run_time&#34;: 2,
+            &#34;lag_ratio&#34;: 0.5
+        }
+        added_anims = kwargs.get(&#34;added_anims&#34;, [])
+        transform_kwargs.update(kwargs)
+        curr_rects.align_submobjects(new_rects)
+        x_coords = set()  # Keep track of new repetitions
+        for rect in curr_rects:
+            x = rect.get_center()[0]
+            if x in x_coords:
+                rect.set_fill(opacity=0)
+            else:
+                x_coords.add(x)
+        self.play(
+            Transform(curr_rects, new_rects, **transform_kwargs),
+            *added_anims
+        )
+
+    def get_vertical_line_to_graph(
+        self,
+        x, graph,
+        line_class=Line,
+        **line_kwargs
+    ):
+        if &#34;color&#34; not in line_kwargs:
+            line_kwargs[&#34;color&#34;] = graph.get_color()
+        return line_class(
+            self.coords_to_point(x, 0),
+            self.input_to_graph_point(x, graph),
+            **line_kwargs
+        )
+
+    def get_vertical_lines_to_graph(
+        self, graph,
+        x_min=None,
+        x_max=None,
+        num_lines=20,
+        **kwargs
+    ):
+        x_min = x_min or self.x_min
+        x_max = x_max or self.x_max
+        return VGroup(*[
+            self.get_vertical_line_to_graph(x, graph, **kwargs)
+            for x in np.linspace(x_min, x_max, num_lines)
+        ])
+
+    def get_secant_slope_group(
+        self,
+        x, graph,
+        dx=None,
+        dx_line_color=None,
+        df_line_color=None,
+        dx_label=None,
+        df_label=None,
+        include_secant_line=True,
+        secant_line_color=None,
+        secant_line_length=10,
+    ):
+        &#34;&#34;&#34;
+        Resulting group is of the form VGroup(
+            dx_line,
+            df_line,
+            dx_label, (if applicable)
+            df_label, (if applicable)
+            secant_line, (if applicable)
+        )
+        with attributes of those names.
+        &#34;&#34;&#34;
+        kwargs = locals()
+        kwargs.pop(&#34;self&#34;)
+        group = VGroup()
+        group.kwargs = kwargs
+
+        dx = dx or float(self.x_max - self.x_min) / 10
+        dx_line_color = dx_line_color or self.default_input_color
+        df_line_color = df_line_color or graph.get_color()
+
+        p1 = self.input_to_graph_point(x, graph)
+        p2 = self.input_to_graph_point(x + dx, graph)
+        interim_point = p2[0] * RIGHT + p1[1] * UP
+
+        group.dx_line = Line(
+            p1, interim_point,
+            color=dx_line_color
+        )
+        group.df_line = Line(
+            interim_point, p2,
+            color=df_line_color
+        )
+        group.add(group.dx_line, group.df_line)
+
+        labels = VGroup()
+        if dx_label is not None:
+            group.dx_label = TexMobject(dx_label)
+            labels.add(group.dx_label)
+            group.add(group.dx_label)
+        if df_label is not None:
+            group.df_label = TexMobject(df_label)
+            labels.add(group.df_label)
+            group.add(group.df_label)
+
+        if len(labels) &gt; 0:
+            max_width = 0.8 * group.dx_line.get_width()
+            max_height = 0.8 * group.df_line.get_height()
+            if labels.get_width() &gt; max_width:
+                labels.set_width(max_width)
+            if labels.get_height() &gt; max_height:
+                labels.set_height(max_height)
+
+        if dx_label is not None:
+            group.dx_label.next_to(
+                group.dx_line,
+                np.sign(dx) * DOWN,
+                buff=group.dx_label.get_height() / 2
+            )
+            group.dx_label.set_color(group.dx_line.get_color())
+
+        if df_label is not None:
+            group.df_label.next_to(
+                group.df_line,
+                np.sign(dx) * RIGHT,
+                buff=group.df_label.get_height() / 2
+            )
+            group.df_label.set_color(group.df_line.get_color())
+
+        if include_secant_line:
+            secant_line_color = secant_line_color or self.default_derivative_color
+            group.secant_line = Line(p1, p2, color=secant_line_color)
+            group.secant_line.scale_in_place(
+                secant_line_length / group.secant_line.get_length()
+            )
+            group.add(group.secant_line)
+
+        return group
+
+    def add_T_label(self, x_val, side=RIGHT, label=None, color=WHITE, animated=False, **kwargs):
+        triangle = RegularPolygon(n=3, start_angle=np.pi / 2)
+        triangle.set_height(MED_SMALL_BUFF)
+        triangle.move_to(self.coords_to_point(x_val, 0), UP)
+        triangle.set_fill(color, 1)
+        triangle.set_stroke(width=0)
+        if label is None:
+            T_label = TexMobject(self.variable_point_label, fill_color=color)
+        else:
+            T_label = TexMobject(label, fill_color=color)
+
+        T_label.next_to(triangle, DOWN)
+        v_line = self.get_vertical_line_to_graph(
+            x_val, self.v_graph,
+            color=YELLOW
+        )
+
+        if animated:
+            self.play(
+                DrawBorderThenFill(triangle),
+                ShowCreation(v_line),
+                Write(T_label, run_time=1),
+                **kwargs
+            )
+
+        if np.all(side == LEFT):
+            self.left_T_label_group = VGroup(T_label, triangle)
+            self.left_v_line = v_line
+            self.add(self.left_T_label_group, self.left_v_line)
+        elif np.all(side == RIGHT):
+            self.right_T_label_group = VGroup(T_label, triangle)
+            self.right_v_line = v_line
+            self.add(self.right_T_label_group, self.right_v_line)
+
+    def get_animation_integral_bounds_change(
+        self,
+        graph,
+        new_t_min,
+        new_t_max,
+        fade_close_to_origin=True,
+        run_time=1.0
+    ):
+        curr_t_min = self.x_axis.point_to_number(self.area.get_left())
+        curr_t_max = self.x_axis.point_to_number(self.area.get_right())
+        if new_t_min is None:
+            new_t_min = curr_t_min
+        if new_t_max is None:
+            new_t_max = curr_t_max
+
+        group = VGroup(self.area)
+        group.add(self.left_v_line)
+        group.add(self.left_T_label_group)
+        group.add(self.right_v_line)
+        group.add(self.right_T_label_group)
+
+        def update_group(group, alpha):
+            area, left_v_line, left_T_label, right_v_line, right_T_label = group
+            t_min = interpolate(curr_t_min, new_t_min, alpha)
+            t_max = interpolate(curr_t_max, new_t_max, alpha)
+            new_area = self.get_area(graph, t_min, t_max)
+
+            new_left_v_line = self.get_vertical_line_to_graph(
+                t_min, graph
+            )
+            new_left_v_line.set_color(left_v_line.get_color())
+            left_T_label.move_to(new_left_v_line.get_bottom(), UP)
+
+            new_right_v_line = self.get_vertical_line_to_graph(
+                t_max, graph
+            )
+            new_right_v_line.set_color(right_v_line.get_color())
+            right_T_label.move_to(new_right_v_line.get_bottom(), UP)
+
+            # Fade close to 0
+            if fade_close_to_origin:
+                if len(left_T_label) &gt; 0:
+                    left_T_label[0].set_fill(opacity=min(1, np.abs(t_min)))
+                if len(right_T_label) &gt; 0:
+                    right_T_label[0].set_fill(opacity=min(1, np.abs(t_max)))
+
+            Transform(area, new_area).update(1)
+            Transform(left_v_line, new_left_v_line).update(1)
+            Transform(right_v_line, new_right_v_line).update(1)
+            return group
+
+        return UpdateFromAlphaFunc(group, update_group, run_time=run_time)
+
+    def animate_secant_slope_group_change(
+        self, secant_slope_group,
+        target_dx=None,
+        target_x=None,
+        run_time=3,
+        added_anims=None,
+        **anim_kwargs
+    ):
+        if target_dx is None and target_x is None:
+            raise Exception(
+                &#34;At least one of target_x and target_dx must not be None&#34;)
+        if added_anims is None:
+            added_anims = []
+
+        start_dx = secant_slope_group.kwargs[&#34;dx&#34;]
+        start_x = secant_slope_group.kwargs[&#34;x&#34;]
+        if target_dx is None:
+            target_dx = start_dx
+        if target_x is None:
+            target_x = start_x
+
+        def update_func(group, alpha):
+            dx = interpolate(start_dx, target_dx, alpha)
+            x = interpolate(start_x, target_x, alpha)
+            kwargs = dict(secant_slope_group.kwargs)
+            kwargs[&#34;dx&#34;] = dx
+            kwargs[&#34;x&#34;] = x
+            new_group = self.get_secant_slope_group(**kwargs)
+            group.become(new_group)
+            return group
+
+        self.play(
+            UpdateFromAlphaFunc(
+                secant_slope_group, update_func,
+                run_time=run_time,
+                **anim_kwargs
+            ),
+            *added_anims
+        )
+        secant_slope_group.kwargs[&#34;x&#34;] = target_x
+        secant_slope_group.kwargs[&#34;dx&#34;] = target_dx</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="manimlib.scene.scene.Scene" href="scene.html#manimlib.scene.scene.Scene">Scene</a></li>
+<li><a title="manimlib.container.container.Container" href="../container/container.html#manimlib.container.container.Container">Container</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="manimlib.scene.graph_scene.GraphScene.CONFIG"><code class="name">var <span class="ident">CONFIG</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="manimlib.scene.graph_scene.GraphScene.add_T_label"><code class="name flex">
+<span>def <span class="ident">add_T_label</span></span>(<span>self, x_val, side=array([1., 0., 0.]), label=None, color='#FFFFFF', animated=False, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_T_label(self, x_val, side=RIGHT, label=None, color=WHITE, animated=False, **kwargs):
+    triangle = RegularPolygon(n=3, start_angle=np.pi / 2)
+    triangle.set_height(MED_SMALL_BUFF)
+    triangle.move_to(self.coords_to_point(x_val, 0), UP)
+    triangle.set_fill(color, 1)
+    triangle.set_stroke(width=0)
+    if label is None:
+        T_label = TexMobject(self.variable_point_label, fill_color=color)
+    else:
+        T_label = TexMobject(label, fill_color=color)
+
+    T_label.next_to(triangle, DOWN)
+    v_line = self.get_vertical_line_to_graph(
+        x_val, self.v_graph,
+        color=YELLOW
+    )
+
+    if animated:
+        self.play(
+            DrawBorderThenFill(triangle),
+            ShowCreation(v_line),
+            Write(T_label, run_time=1),
+            **kwargs
+        )
+
+    if np.all(side == LEFT):
+        self.left_T_label_group = VGroup(T_label, triangle)
+        self.left_v_line = v_line
+        self.add(self.left_T_label_group, self.left_v_line)
+    elif np.all(side == RIGHT):
+        self.right_T_label_group = VGroup(T_label, triangle)
+        self.right_v_line = v_line
+        self.add(self.right_T_label_group, self.right_v_line)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.angle_of_tangent"><code class="name flex">
+<span>def <span class="ident">angle_of_tangent</span></span>(<span>self, x, graph, dx=0.01)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def angle_of_tangent(self, x, graph, dx=0.01):
+    vect = self.input_to_graph_point(
+        x + dx, graph) - self.input_to_graph_point(x, graph)
+    return angle_of_vector(vect)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.animate_secant_slope_group_change"><code class="name flex">
+<span>def <span class="ident">animate_secant_slope_group_change</span></span>(<span>self, secant_slope_group, target_dx=None, target_x=None, run_time=3, added_anims=None, **anim_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def animate_secant_slope_group_change(
+    self, secant_slope_group,
+    target_dx=None,
+    target_x=None,
+    run_time=3,
+    added_anims=None,
+    **anim_kwargs
+):
+    if target_dx is None and target_x is None:
+        raise Exception(
+            &#34;At least one of target_x and target_dx must not be None&#34;)
+    if added_anims is None:
+        added_anims = []
+
+    start_dx = secant_slope_group.kwargs[&#34;dx&#34;]
+    start_x = secant_slope_group.kwargs[&#34;x&#34;]
+    if target_dx is None:
+        target_dx = start_dx
+    if target_x is None:
+        target_x = start_x
+
+    def update_func(group, alpha):
+        dx = interpolate(start_dx, target_dx, alpha)
+        x = interpolate(start_x, target_x, alpha)
+        kwargs = dict(secant_slope_group.kwargs)
+        kwargs[&#34;dx&#34;] = dx
+        kwargs[&#34;x&#34;] = x
+        new_group = self.get_secant_slope_group(**kwargs)
+        group.become(new_group)
+        return group
+
+    self.play(
+        UpdateFromAlphaFunc(
+            secant_slope_group, update_func,
+            run_time=run_time,
+            **anim_kwargs
+        ),
+        *added_anims
+    )
+    secant_slope_group.kwargs[&#34;x&#34;] = target_x
+    secant_slope_group.kwargs[&#34;dx&#34;] = target_dx</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.coords_to_point"><code class="name flex">
+<span>def <span class="ident">coords_to_point</span></span>(<span>self, x, y)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def coords_to_point(self, x, y):
+    assert(hasattr(self, &#34;x_axis&#34;) and hasattr(self, &#34;y_axis&#34;))
+    result = self.x_axis.number_to_point(x)[0] * RIGHT
+    result += self.y_axis.number_to_point(y)[1] * UP
+    return result</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_animation_integral_bounds_change"><code class="name flex">
+<span>def <span class="ident">get_animation_integral_bounds_change</span></span>(<span>self, graph, new_t_min, new_t_max, fade_close_to_origin=True, run_time=1.0)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_animation_integral_bounds_change(
+    self,
+    graph,
+    new_t_min,
+    new_t_max,
+    fade_close_to_origin=True,
+    run_time=1.0
+):
+    curr_t_min = self.x_axis.point_to_number(self.area.get_left())
+    curr_t_max = self.x_axis.point_to_number(self.area.get_right())
+    if new_t_min is None:
+        new_t_min = curr_t_min
+    if new_t_max is None:
+        new_t_max = curr_t_max
+
+    group = VGroup(self.area)
+    group.add(self.left_v_line)
+    group.add(self.left_T_label_group)
+    group.add(self.right_v_line)
+    group.add(self.right_T_label_group)
+
+    def update_group(group, alpha):
+        area, left_v_line, left_T_label, right_v_line, right_T_label = group
+        t_min = interpolate(curr_t_min, new_t_min, alpha)
+        t_max = interpolate(curr_t_max, new_t_max, alpha)
+        new_area = self.get_area(graph, t_min, t_max)
+
+        new_left_v_line = self.get_vertical_line_to_graph(
+            t_min, graph
+        )
+        new_left_v_line.set_color(left_v_line.get_color())
+        left_T_label.move_to(new_left_v_line.get_bottom(), UP)
+
+        new_right_v_line = self.get_vertical_line_to_graph(
+            t_max, graph
+        )
+        new_right_v_line.set_color(right_v_line.get_color())
+        right_T_label.move_to(new_right_v_line.get_bottom(), UP)
+
+        # Fade close to 0
+        if fade_close_to_origin:
+            if len(left_T_label) &gt; 0:
+                left_T_label[0].set_fill(opacity=min(1, np.abs(t_min)))
+            if len(right_T_label) &gt; 0:
+                right_T_label[0].set_fill(opacity=min(1, np.abs(t_max)))
+
+        Transform(area, new_area).update(1)
+        Transform(left_v_line, new_left_v_line).update(1)
+        Transform(right_v_line, new_right_v_line).update(1)
+        return group
+
+    return UpdateFromAlphaFunc(group, update_group, run_time=run_time)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_area"><code class="name flex">
+<span>def <span class="ident">get_area</span></span>(<span>self, graph, t_min, t_max)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_area(self, graph, t_min, t_max):
+    numerator = max(t_max - t_min, 0.0001)
+    dx = float(numerator) / self.num_rects
+    return self.get_riemann_rectangles(
+        graph,
+        x_min=t_min,
+        x_max=t_max,
+        dx=dx,
+        stroke_width=0,
+    ).set_fill(opacity=self.area_opacity)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_derivative_graph"><code class="name flex">
+<span>def <span class="ident">get_derivative_graph</span></span>(<span>self, graph, dx=0.01, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_derivative_graph(self, graph, dx=0.01, **kwargs):
+    if &#34;color&#34; not in kwargs:
+        kwargs[&#34;color&#34;] = self.default_derivative_color
+
+    def deriv(x):
+        return self.slope_of_tangent(x, graph, dx) / self.space_unit_to_y
+    return self.get_graph(deriv, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_graph"><code class="name flex">
+<span>def <span class="ident">get_graph</span></span>(<span>self, func, color=None, x_min=None, x_max=None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_graph(
+    self, func,
+    color=None,
+    x_min=None,
+    x_max=None,
+    **kwargs
+):
+    if color is None:
+        color = next(self.default_graph_colors_cycle)
+    if x_min is None:
+        x_min = self.x_min
+    if x_max is None:
+        x_max = self.x_max
+
+    def parameterized_function(alpha):
+        x = interpolate(x_min, x_max, alpha)
+        y = func(x)
+        if not np.isfinite(y):
+            y = self.y_max
+        return self.coords_to_point(x, y)
+
+    graph = ParametricFunction(
+        parameterized_function,
+        color=color,
+        **kwargs
+    )
+    graph.underlying_function = func
+    return graph</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_graph_label"><code class="name flex">
+<span>def <span class="ident">get_graph_label</span></span>(<span>self, graph, label='f(x)', x_val=None, direction=array([1., 0., 0.]), buff=0.25, color=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_graph_label(
+    self,
+    graph,
+    label=&#34;f(x)&#34;,
+    x_val=None,
+    direction=RIGHT,
+    buff=MED_SMALL_BUFF,
+    color=None,
+):
+    label = TexMobject(label)
+    color = color or graph.get_color()
+    label.set_color(color)
+    if x_val is None:
+        # Search from right to left
+        for x in np.linspace(self.x_max, self.x_min, 100):
+            point = self.input_to_graph_point(x, graph)
+            if point[1] &lt; FRAME_Y_RADIUS:
+                break
+        x_val = x
+    label.next_to(
+        self.input_to_graph_point(x_val, graph),
+        direction,
+        buff=buff
+    )
+    label.shift_onto_screen()
+    return label</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_riemann_rectangles"><code class="name flex">
+<span>def <span class="ident">get_riemann_rectangles</span></span>(<span>self, graph, x_min=None, x_max=None, dx=0.1, input_sample_type='left', stroke_width=1, stroke_color='#000000', fill_opacity=1, start_color=None, end_color=None, show_signed_area=True, width_scale_factor=1.001)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_riemann_rectangles(
+    self,
+    graph,
+    x_min=None,
+    x_max=None,
+    dx=0.1,
+    input_sample_type=&#34;left&#34;,
+    stroke_width=1,
+    stroke_color=BLACK,
+    fill_opacity=1,
+    start_color=None,
+    end_color=None,
+    show_signed_area=True,
+    width_scale_factor=1.001
+):
+    x_min = x_min if x_min is not None else self.x_min
+    x_max = x_max if x_max is not None else self.x_max
+    if start_color is None:
+        start_color = self.default_riemann_start_color
+    if end_color is None:
+        end_color = self.default_riemann_end_color
+    rectangles = VGroup()
+    x_range = np.arange(x_min, x_max, dx)
+    colors = color_gradient([start_color, end_color], len(x_range))
+    for x, color in zip(x_range, colors):
+        if input_sample_type == &#34;left&#34;:
+            sample_input = x
+        elif input_sample_type == &#34;right&#34;:
+            sample_input = x + dx
+        elif input_sample_type == &#34;center&#34;:
+            sample_input = x + 0.5 * dx
+        else:
+            raise Exception(&#34;Invalid input sample type&#34;)
+        graph_point = self.input_to_graph_point(sample_input, graph)
+        points = VGroup(*list(map(VectorizedPoint, [
+            self.coords_to_point(x, 0),
+            self.coords_to_point(x + width_scale_factor * dx, 0),
+            graph_point
+        ])))
+
+        rect = Rectangle()
+        rect.replace(points, stretch=True)
+        if graph_point[1] &lt; self.graph_origin[1] and show_signed_area:
+            fill_color = invert_color(color)
+        else:
+            fill_color = color
+        rect.set_fill(fill_color, opacity=fill_opacity)
+        rect.set_stroke(stroke_color, width=stroke_width)
+        rectangles.add(rect)
+    return rectangles</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_riemann_rectangles_list"><code class="name flex">
+<span>def <span class="ident">get_riemann_rectangles_list</span></span>(<span>self, graph, n_iterations, max_dx=0.5, power_base=2, stroke_width=1, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_riemann_rectangles_list(
+    self,
+    graph,
+    n_iterations,
+    max_dx=0.5,
+    power_base=2,
+    stroke_width=1,
+    **kwargs
+):
+    return [
+        self.get_riemann_rectangles(
+            graph=graph,
+            dx=float(max_dx) / (power_base**n),
+            stroke_width=float(stroke_width) / (power_base**n),
+            **kwargs
+        )
+        for n in range(n_iterations)
+    ]</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_secant_slope_group"><code class="name flex">
+<span>def <span class="ident">get_secant_slope_group</span></span>(<span>self, x, graph, dx=None, dx_line_color=None, df_line_color=None, dx_label=None, df_label=None, include_secant_line=True, secant_line_color=None, secant_line_length=10)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Resulting group is of the form VGroup(
+dx_line,
+df_line,
+dx_label, (if applicable)
+df_label, (if applicable)
+secant_line, (if applicable)
+)
+with attributes of those names.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_secant_slope_group(
+    self,
+    x, graph,
+    dx=None,
+    dx_line_color=None,
+    df_line_color=None,
+    dx_label=None,
+    df_label=None,
+    include_secant_line=True,
+    secant_line_color=None,
+    secant_line_length=10,
+):
+    &#34;&#34;&#34;
+    Resulting group is of the form VGroup(
+        dx_line,
+        df_line,
+        dx_label, (if applicable)
+        df_label, (if applicable)
+        secant_line, (if applicable)
+    )
+    with attributes of those names.
+    &#34;&#34;&#34;
+    kwargs = locals()
+    kwargs.pop(&#34;self&#34;)
+    group = VGroup()
+    group.kwargs = kwargs
+
+    dx = dx or float(self.x_max - self.x_min) / 10
+    dx_line_color = dx_line_color or self.default_input_color
+    df_line_color = df_line_color or graph.get_color()
+
+    p1 = self.input_to_graph_point(x, graph)
+    p2 = self.input_to_graph_point(x + dx, graph)
+    interim_point = p2[0] * RIGHT + p1[1] * UP
+
+    group.dx_line = Line(
+        p1, interim_point,
+        color=dx_line_color
+    )
+    group.df_line = Line(
+        interim_point, p2,
+        color=df_line_color
+    )
+    group.add(group.dx_line, group.df_line)
+
+    labels = VGroup()
+    if dx_label is not None:
+        group.dx_label = TexMobject(dx_label)
+        labels.add(group.dx_label)
+        group.add(group.dx_label)
+    if df_label is not None:
+        group.df_label = TexMobject(df_label)
+        labels.add(group.df_label)
+        group.add(group.df_label)
+
+    if len(labels) &gt; 0:
+        max_width = 0.8 * group.dx_line.get_width()
+        max_height = 0.8 * group.df_line.get_height()
+        if labels.get_width() &gt; max_width:
+            labels.set_width(max_width)
+        if labels.get_height() &gt; max_height:
+            labels.set_height(max_height)
+
+    if dx_label is not None:
+        group.dx_label.next_to(
+            group.dx_line,
+            np.sign(dx) * DOWN,
+            buff=group.dx_label.get_height() / 2
+        )
+        group.dx_label.set_color(group.dx_line.get_color())
+
+    if df_label is not None:
+        group.df_label.next_to(
+            group.df_line,
+            np.sign(dx) * RIGHT,
+            buff=group.df_label.get_height() / 2
+        )
+        group.df_label.set_color(group.df_line.get_color())
+
+    if include_secant_line:
+        secant_line_color = secant_line_color or self.default_derivative_color
+        group.secant_line = Line(p1, p2, color=secant_line_color)
+        group.secant_line.scale_in_place(
+            secant_line_length / group.secant_line.get_length()
+        )
+        group.add(group.secant_line)
+
+    return group</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_vertical_line_to_graph"><code class="name flex">
+<span>def <span class="ident">get_vertical_line_to_graph</span></span>(<span>self, x, graph, line_class=manimlib.mobject.geometry.Line, **line_kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_vertical_line_to_graph(
+    self,
+    x, graph,
+    line_class=Line,
+    **line_kwargs
+):
+    if &#34;color&#34; not in line_kwargs:
+        line_kwargs[&#34;color&#34;] = graph.get_color()
+    return line_class(
+        self.coords_to_point(x, 0),
+        self.input_to_graph_point(x, graph),
+        **line_kwargs
+    )</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.get_vertical_lines_to_graph"><code class="name flex">
+<span>def <span class="ident">get_vertical_lines_to_graph</span></span>(<span>self, graph, x_min=None, x_max=None, num_lines=20, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_vertical_lines_to_graph(
+    self, graph,
+    x_min=None,
+    x_max=None,
+    num_lines=20,
+    **kwargs
+):
+    x_min = x_min or self.x_min
+    x_max = x_max or self.x_max
+    return VGroup(*[
+        self.get_vertical_line_to_graph(x, graph, **kwargs)
+        for x in np.linspace(x_min, x_max, num_lines)
+    ])</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.input_to_graph_point"><code class="name flex">
+<span>def <span class="ident">input_to_graph_point</span></span>(<span>self, x, graph)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def input_to_graph_point(self, x, graph):
+    return self.coords_to_point(x, graph.underlying_function(x))</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.point_to_coords"><code class="name flex">
+<span>def <span class="ident">point_to_coords</span></span>(<span>self, point)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def point_to_coords(self, point):
+    return (self.x_axis.point_to_number(point),
+            self.y_axis.point_to_number(point))</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.setup_axes"><code class="name flex">
+<span>def <span class="ident">setup_axes</span></span>(<span>self, animate=False)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setup_axes(self, animate=False):
+    # TODO, once eoc is done, refactor this to be less redundant.
+    x_num_range = float(self.x_max - self.x_min)
+    self.space_unit_to_x = self.x_axis_width / x_num_range
+    if self.x_labeled_nums is None:
+        self.x_labeled_nums = []
+    if self.x_leftmost_tick is None:
+        self.x_leftmost_tick = self.x_min
+    x_axis = NumberLine(
+        x_min=self.x_min,
+        x_max=self.x_max,
+        unit_size=self.space_unit_to_x,
+        tick_frequency=self.x_tick_frequency,
+        leftmost_tick=self.x_leftmost_tick,
+        numbers_with_elongated_ticks=self.x_labeled_nums,
+        color=self.axes_color
+    )
+    x_axis.shift(self.graph_origin - x_axis.number_to_point(0))
+    if len(self.x_labeled_nums) &gt; 0:
+        if self.exclude_zero_label:
+            self.x_labeled_nums = [x for x in self.x_labeled_nums if x != 0]
+        x_axis.add_numbers(*self.x_labeled_nums)
+    if self.x_axis_label:
+        x_label = TextMobject(self.x_axis_label)
+        x_label.next_to(
+            x_axis.get_tick_marks(), UP + RIGHT,
+            buff=SMALL_BUFF
+        )
+        x_label.shift_onto_screen()
+        x_axis.add(x_label)
+        self.x_axis_label_mob = x_label
+
+    y_num_range = float(self.y_max - self.y_min)
+    self.space_unit_to_y = self.y_axis_height / y_num_range
+
+    if self.y_labeled_nums is None:
+        self.y_labeled_nums = []
+    if self.y_bottom_tick is None:
+        self.y_bottom_tick = self.y_min
+    y_axis = NumberLine(
+        x_min=self.y_min,
+        x_max=self.y_max,
+        unit_size=self.space_unit_to_y,
+        tick_frequency=self.y_tick_frequency,
+        leftmost_tick=self.y_bottom_tick,
+        numbers_with_elongated_ticks=self.y_labeled_nums,
+        color=self.axes_color,
+        line_to_number_vect=LEFT,
+        label_direction=LEFT,
+    )
+    y_axis.shift(self.graph_origin - y_axis.number_to_point(0))
+    y_axis.rotate(np.pi / 2, about_point=y_axis.number_to_point(0))
+    if len(self.y_labeled_nums) &gt; 0:
+        if self.exclude_zero_label:
+            self.y_labeled_nums = [y for y in self.y_labeled_nums if y != 0]
+        y_axis.add_numbers(*self.y_labeled_nums)
+    if self.y_axis_label:
+        y_label = TextMobject(self.y_axis_label)
+        y_label.next_to(
+            y_axis.get_corner(UP + RIGHT), UP + RIGHT,
+            buff=SMALL_BUFF
+        )
+        y_label.shift_onto_screen()
+        y_axis.add(y_label)
+        self.y_axis_label_mob = y_label
+
+    if animate:
+        self.play(Write(VGroup(x_axis, y_axis)))
+    else:
+        self.add(x_axis, y_axis)
+    self.x_axis, self.y_axis = self.axes = VGroup(x_axis, y_axis)
+    self.default_graph_colors = it.cycle(self.default_graph_colors)</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.slope_of_tangent"><code class="name flex">
+<span>def <span class="ident">slope_of_tangent</span></span>(<span>self, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def slope_of_tangent(self, *args, **kwargs):
+    return np.tan(self.angle_of_tangent(*args, **kwargs))</code></pre>
+</details>
+</dd>
+<dt id="manimlib.scene.graph_scene.GraphScene.transform_between_riemann_rects"><code class="name flex">
+<span>def <span class="ident">transform_between_riemann_rects</span></span>(<span>self, curr_rects, new_rects, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def transform_between_riemann_rects(self, curr_rects, new_rects, **kwargs):
+    transform_kwargs = {
+        &#34;run_time&#34;: 2,
+        &#34;lag_ratio&#34;: 0.5
+    }
+    added_anims = kwargs.get(&#34;added_anims&#34;, [])
+    transform_kwargs.update(kwargs)
+    curr_rects.align_submobjects(new_rects)
+    x_coords = set()  # Keep track of new repetitions
+    for rect in curr_rects:
+        x = rect.get_center()[0]
+        if x in x_coords:
+            rect.set_fill(opacity=0)
+        else:
+            x_coords.add(x)
+    self.play(
+        Transform(curr_rects, new_rects, **transform_kwargs),
+        *added_anims
+    )</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="manimlib.scene.scene.Scene" href="scene.html#manimlib.scene.scene.Scene">Scene</a></b></code>:
+<ul class="hlist">
+<li><code><a title="manimlib.scene.scene.Scene.add" href="scene.html#manimlib.scene.scene.Scene.add">add</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.add_mobjects_among" href="scene.html#manimlib.scene.scene.Scene.add_mobjects_among">add_mobjects_among</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.compile_play_args_to_animation_list" href="scene.html#manimlib.scene.scene.Scene.compile_play_args_to_animation_list">compile_play_args_to_animation_list</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.restructure_mobjects" href="scene.html#manimlib.scene.scene.Scene.restructure_mobjects">restructure_mobjects</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.set_variables_as_attrs" href="scene.html#manimlib.scene.scene.Scene.set_variables_as_attrs">set_variables_as_attrs</a></code></li>
+<li><code><a title="manimlib.scene.scene.Scene.setup" href="scene.html#manimlib.scene.scene.Scene.setup">setup</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="manimlib.scene" href="index.html">manimlib.scene</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="manimlib.scene.graph_scene.GraphScene" href="#manimlib.scene.graph_scene.GraphScene">GraphScene</a></code></h4>
+<ul class="">
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.CONFIG" href="#manimlib.scene.graph_scene.GraphScene.CONFIG">CONFIG</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.add_T_label" href="#manimlib.scene.graph_scene.GraphScene.add_T_label">add_T_label</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.angle_of_tangent" href="#manimlib.scene.graph_scene.GraphScene.angle_of_tangent">angle_of_tangent</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.animate_secant_slope_group_change" href="#manimlib.scene.graph_scene.GraphScene.animate_secant_slope_group_change">animate_secant_slope_group_change</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.coords_to_point" href="#manimlib.scene.graph_scene.GraphScene.coords_to_point">coords_to_point</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_animation_integral_bounds_change" href="#manimlib.scene.graph_scene.GraphScene.get_animation_integral_bounds_change">get_animation_integral_bounds_change</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_area" href="#manimlib.scene.graph_scene.GraphScene.get_area">get_area</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_derivative_graph" href="#manimlib.scene.graph_scene.GraphScene.get_derivative_graph">get_derivative_graph</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_graph" href="#manimlib.scene.graph_scene.GraphScene.get_graph">get_graph</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_graph_label" href="#manimlib.scene.graph_scene.GraphScene.get_graph_label">get_graph_label</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_riemann_rectangles" href="#manimlib.scene.graph_scene.GraphScene.get_riemann_rectangles">get_riemann_rectangles</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_riemann_rectangles_list" href="#manimlib.scene.graph_scene.GraphScene.get_riemann_rectangles_list">get_riemann_rectangles_list</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_secant_slope_group" href="#manimlib.scene.graph_scene.GraphScene.get_secant_slope_group">get_secant_slope_group</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_vertical_line_to_graph" href="#manimlib.scene.graph_scene.GraphScene.get_vertical_line_to_graph">get_vertical_line_to_graph</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.get_vertical_lines_to_graph" href="#manimlib.scene.graph_scene.GraphScene.get_vertical_lines_to_graph">get_vertical_lines_to_graph</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.input_to_graph_point" href="#manimlib.scene.graph_scene.GraphScene.input_to_graph_point">input_to_graph_point</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.point_to_coords" href="#manimlib.scene.graph_scene.GraphScene.point_to_coords">point_to_coords</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.setup_axes" href="#manimlib.scene.graph_scene.GraphScene.setup_axes">setup_axes</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.slope_of_tangent" href="#manimlib.scene.graph_scene.GraphScene.slope_of_tangent">slope_of_tangent</a></code></li>
+<li><code><a title="manimlib.scene.graph_scene.GraphScene.transform_between_riemann_rects" href="#manimlib.scene.graph_scene.GraphScene.transform_between_riemann_rects">transform_between_riemann_rects</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
